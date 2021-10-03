@@ -7,6 +7,7 @@ typedef struct pointer{
     struct pointer *next;
     struct pointer *prev;
     struct pointer *rr;
+    struct pointer *e;
 }node;
 node *list=NULL;
 const int size=5;
