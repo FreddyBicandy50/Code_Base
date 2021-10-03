@@ -5,15 +5,12 @@
 typedef struct pointer{
     int data;
     struct pointer *next;
-    struct pointer *prev;
-    struct pointer *rr;
-    struct pointer *e;
+    struct pointer *prev; 
 }node;
 node *list=NULL;
 const int size=5;
 int fprint_list();
-int init_next(int number){
-    printf("d");
+int init_next(int number){ 
     node *temp=malloc(sizeof(node));
     if(temp==NULL){
         printf("temp is NULL!\nsegmentation fault");
