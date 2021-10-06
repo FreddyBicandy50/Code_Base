@@ -99,6 +99,7 @@ int main (void) {
     list=last;
 
     //delestion 
+    printf("\n");
    exit=false;
     while(exit!=true){ 
         char user;
