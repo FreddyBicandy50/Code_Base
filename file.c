@@ -38,29 +38,40 @@ bool prev(){
 }
 
 //delete function
-int del_list(){
-    int number;
-    printf("\ndelet number:");
-    scanf("%d",&number);
-    node *recent;
-    node *start;
-    while(list!=NULL){  
-        if(list->data==number){ 
-            if (list->prev==NULL){
+int fdel_list(node *last){ 
+    int delete;
+    printf("\ndelete number:");
+    scanf("%d",&delete);
+   
+    while(true){
+        if (list->data==delete){ 
+            if(list->prev==NULL){
                 list=list->next;
                 list->prev=NULL;
+                return 0;
             }else if (list->next==NULL){
                 list=list->prev;
-                list->next=NULL;
-            }
-            else{
-                recent=list->prev;
+                list->next=NULL; 
+                list=last;
+                return 0;
+           }else{
+                node *temp=list->next;
+                list=list->prev;
+                list->next=temp;
+                temp=list;
                 list=list->next;
-                recent->next=list; 
-            } 
-        }
-        list=list->next;
+                list->prev=temp;
+                list=last;
+                return 0;
+           }
+        }else{
+            if(list->next==NULL){
+                return 0;
+            }
+            list=list->next;
+        } 
     }
+    
     return 0;
 }
 
@@ -87,9 +98,22 @@ int main (void) {
     fprint_list();
     list=last;
 
-    //delestion
-    del_list();
-
+    //delestion 
+   exit=false;
+    while(exit!=true){ 
+        char user;
+        do{
+            printf("delete number?:[y/n]:");
+            scanf("%c",&user); 
+            printf("\n");
+        }while(user!='y' && user!='n'); 
+        if (user!='y'){
+            break;
+        }
+        fdel_list(last);
+    }
+    printf("\n");
+    
     //printing
     fprint_list();
    
