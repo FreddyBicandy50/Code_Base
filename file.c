@@ -48,6 +48,7 @@ int fdel_list(node *last){
             if(list->prev==NULL){
                 list=list->next;
                 list->prev=NULL;
+                last=list;
                 return 0;
             }else if (list->next==NULL){
                 list=list->prev;
@@ -100,11 +101,12 @@ int main (void) {
 
     //delestion 
     printf("\n");
-   exit=false;
+    exit=false;
     while(exit!=true){ 
         char user;
+        printf("delete number?:[y/n]:");
         do{
-            printf("delete number?:[y/n]:");
+            
             scanf("%c",&user); 
             printf("\n");
         }while(user!='y' && user!='n'); 
