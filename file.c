@@ -1,57 +1,144 @@
-//calling libraires and predefines
+//calling libraries and predefines
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#define n_size 6
 typedef struct pointer{
     int data;
-    struct pointer *next;
-    struct pointer *prev;
+    struct pointer* next;
+    struct pointer* prev;
 }node;
 node *list=NULL;
 int fprint_list();
 
-//initialise list with next pointer
-int init_next_list(int number){
+
+//list function
+int init_list(int input){
     node *temp=malloc(sizeof(node));
     if(temp==NULL){
-        printf("temp is null!\nsegmentaion fault");
+        printf("malloc failure\n");
         return 1;
     }
-    temp->data=number;
+    temp->data=input;
     temp->next=list;
     while(list!=NULL){
         list=list->next;
     }
     list=temp;
+    while(true){
+       if(list->next!=NULL){ 
+            list=list->next;
+            list->prev=temp;
+            list=list->prev;
+        }
+       break;
+    } 
     return 0;
 }
+
+//delete function
+int delete_list(int input){ 
+    node *list_head=list;
+    while(true){
+        if(list->data==input){
+            if(list->prev==NULL){
+                list=list->next;
+                list->prev=NULL;
+                return 0;
+            }else if(list->next==NULL){
+                list=list->prev;
+                list->next=NULL;
+                return 0;
+            }else{
+                node *temp=list->next;
+                list=list->prev;
+            }
+        }
+    }
+    return 0;
+}   
+//main function
 int main (void){
+    //initialise the list
     int size;
-    printf("size of list:\n");
+    printf("Size of list:");
     do{
-        scanf("%d",&number);
+        scanf("%d",&size);
+        if(size<=0){
+            printf("size of list should be >0:");
+        }
     }while(size<=0);
-    for (int i=1; i<=size; i++){
-        int number,check;
-        printf("[%d]:\n",i);
+    for (int i =1; i <=size; i++){
+        int number,malloc_check;
+        printf("number [%d]:",i);
         scanf("%d",&number);
-        check=init_next_list(number);
-        if(check==1){
+        malloc_check=init_list(number);
+        if(malloc_check==1){
             printf("exiting...");
             exit(-1);
-        } 
+        }
     }
-    
-    //priting
+    //printing
     fprint_list();
 
-    //end
+
+    //delete/insert
+    printf("\n"); 
+    while (true){
+        char argv[n_size];
+        printf("delete/insert");
+        do{
+        scanf("%s",&argv);
+        }while(strcmp(argv,"delete")!=0 && strcmp(argv,"insert")!=0);
+        if(strcmp(argv,"delete")==0){
+            int delete,search;
+            printf("delete number:");
+            scanf("%d",&delete);
+            search=delete_list(delete);
+            if(search!=0){
+                printf("\nNot found\n");
+            }
+        }else{
+            int insert,malloc_check;
+            printf("insert number:");
+            scanf("%d",&insert);
+            malloc_check = init_list(insert);
+            if (malloc_check == 1){
+                printf("exiting...");
+                exit(-1);
+            }
+        } 
+        printf("exit?[y/n]:");
+        do{
+            scanf("%s", &argv);
+        } while (strcmp(argv, "y") != 0 && strcmp(argv, "n") != 0);
+        if(argv=="y"){
+            break;
+        }
+    } 
+    //end of program 
+    fprint_list();
     free(list);
     return 0;
 }
+
+//print functions
 int fprint_list(){
-    while (list!=NULL){
+    while(list!=NULL){
         printf("%d\t",list->data);
+        if(list->next==NULL){
+            break;
+        }
         list=list->next;
-    } 
+    }
+    printf("\n");
+    while(list!=NULL){
+        printf("%d\t",list->data);
+        if(list->prev==NULL){
+            break;
+        }
+        list=list->prev;
+    }
     return 0;
 }
