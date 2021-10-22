@@ -49,15 +49,38 @@ int delete_list(int input){
             }else if(list->next==NULL){
                 list=list->prev;
                 list->next=NULL;
+                list=list_head;
                 return 0;
-            }else{
-                node *temp=list->next;
-                list=list->prev;
+            }else{ 
+                list=list->prev; 
+                list->next=list->next->next; 
+                list=list->next;
+                list->prev=list->prev->prev;
+                list = list_head;
+                return 0;
             }
+        }else{
+            if(list==NULL){
+                return 1;
+            }
+            list=list->next; 
         }
     }
     return 0;
 }   
+//sort function
+int sort(){
+    for(node *i=list; i!=NULL; i=i->next){
+        for(node *j=i->next; j!=NULL; j=j->next){
+            if(i->data<j->data){
+                int temp=i->data;
+                i->data=j->data;
+                j->data=temp;
+            }
+        }
+    }
+    return 0;
+}
 //main function
 int main (void){
     //initialise the list
@@ -79,17 +102,21 @@ int main (void){
             exit(-1);
         }
     }
-    //printing
-    fprint_list();
 
+    //sort printing
+    sort();
+    fprint_list();
 
     //delete/insert
     printf("\n"); 
     while (true){
         char argv[n_size];
-        printf("delete/insert");
+        printf("delete/insert:");
         do{
-        scanf("%s",&argv);
+            scanf("%s",&argv);
+            if(strcmp(argv,"delete")!=0 && strcmp(argv,"insert")!=0){
+                printf("delete/insert:");
+            }
         }while(strcmp(argv,"delete")!=0 && strcmp(argv,"insert")!=0);
         if(strcmp(argv,"delete")==0){
             int delete,search;
@@ -108,31 +135,38 @@ int main (void){
                 printf("exiting...");
                 exit(-1);
             }
-        } 
-        printf("exit?[y/n]:");
+        }  
+        char user[n_size];
+        printf("exit [yes/no]:");
         do{
-            scanf("%s", &argv);
-        } while (strcmp(argv, "y") != 0 && strcmp(argv, "n") != 0);
-        if(argv=="y"){
+            scanf("%s",&user);
+            if(strcmp(user, "yes")!=0 && strcmp(user, "no")!=0){
+                printf("yes/no:");
+            }
+        }while (strcmp(user, "yes")!=0 && strcmp(user, "no")!=0);
+        if(strcmp(user,"yes")==0){
             break;
         }
-    } 
-    //end of program 
+    }
+
+    //sort printing
+    sort();
     fprint_list();
+
+
+    //end of program  
     free(list);
     return 0;
 }
 
 //print functions
 int fprint_list(){
-    while(list!=NULL){
-        printf("%d\t",list->data);
+    while(list!=NULL){ 
         if(list->next==NULL){
             break;
         }
         list=list->next;
     }
-    printf("\n");
     while(list!=NULL){
         printf("%d\t",list->data);
         if(list->prev==NULL){
