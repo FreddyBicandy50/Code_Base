@@ -23,6 +23,7 @@ int init_list(int input)
         list = list->next;
     }
     list = temp;
+    ddd
     while (true){
         if (list->next != NULL){
             list = list->next;
