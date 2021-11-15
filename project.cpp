@@ -22,8 +22,7 @@ int init_list(int input)
     while (list != NULL){
         list = list->next;
     }
-    list = temp;
-    ddd
+    list = temp; 
     while (true){
         if (list->next != NULL){
             list = list->next;
