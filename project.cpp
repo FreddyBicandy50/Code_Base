@@ -7,8 +7,6 @@ typedef struct pointer{
     struct pointer *prev;
 } node;
 node *list = NULL;
-int fprint_list();
-
 //list function
 int init_list(int input)
 {
@@ -22,7 +20,7 @@ int init_list(int input)
     while (list != NULL){
         list = list->next;
     }
-    list = temp; 
+    list = temp;
     while (true){
         if (list->next != NULL){
             list = list->next;
