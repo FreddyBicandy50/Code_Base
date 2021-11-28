@@ -1,32 +1,74 @@
+//calling libraries and predefines
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
-using namespace std;
+#include <cctype>
+#include <cstdio>
+#define INDEXED_Position 0
+#define BUFFER_Position_Size 1
+#define Position_VALUE 2
 #define sizeofstrlen 9
-char FILENAME[sizeofstrlen]="list.txt";
+char FILENAME[sizeofstrlen] = "list.txt";
 FILE *File_Var = fopen(FILENAME, "r");
+using namespace std;
 
-int main(void){ 
-    File_Var=NULL;
+//usermame and password lists
+typedef struct pointer{
+    string data;
+    struct pointer *next;
+}node;
+node *list_usernames=NULL;
+node *list_passwords=NULL;
+
+//initiliase name in singly-linked-list
+bool init_name_list(string Name_HOLDER){
+    node *temp=(node *) malloc(sizeof(node));
+    if(temp==NULL){
+        cout<< "Malloc Failure" <<endl;
+    }
+    temp->data=Name_HOLDER;
+    temp->next=list_usernames;
+    while(list_usernames!=NULL){
+        list_usernames=list_usernames->next;
+    }
+    list_usernames=temp;
+    return true;
+}
+
+//initiliase passwords in singly-linked-list
+bool init_password_list(string Password_HOLDER){ 
+    node *temp=(node *) malloc(sizeof(node));
+    if(temp==NULL){
+        cout<< "Malloc Failure" <<endl;
+    }
+    temp->data=Password_HOLDER;
+    temp->next=list_passwords;
+    while(list_passwords!=NULL){
+        list_passwords=list_passwords->next;
+    }
+    list_passwords=temp;
+    return true;
+}
+
+//main function
+int main(void){
+    //extracting list from database
     if (File_Var == NULL){
         cout << "FATAL:Error Search Stream!/>>IOFile Not Found!>>" << endl;
-        cout << "Download File:" << endl;
+        cout << "Download File:https://github.com/FreddyBicandy50/MyLibrary/blob/main/Projects/list.txt" << endl;
     }
-    /*int j = 0;
-    char *argv[], getdata;
-    while (fscanf(File_Var, "%d", &getdata) == 1)
-    {
-        argv[] = getdata;
-        j++;
-    }
-    int c = j;
-    while (true)
-    {
-        cout << argv[c] << endl;
-        if (c == j)
-        {
-            break;
+    char *Char_HOLDER= (char *)malloc(sizeof(char)*sizeofstrlen*100);
+    static int PlaceHOLDER=INDEXED_Position;
+    while (fscanf(File_Var, "%s", Char_HOLDER) == 1){
+        if (PlaceHOLDER % Position_VALUE == INDEXED_Position){
+            init_name_list(Char_HOLDER);
+        }else{
+            init_password_list(Char_HOLDER);
         }
-    }*/
+        PlaceHOLDER+=BUFFER_Position_Size ;
+    }
+    //1.search
+    //2.Main Activity
+    //3.register
     return 0;
-} 
+}
