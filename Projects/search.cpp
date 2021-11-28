@@ -1,15 +1,7 @@
- #include <iostream>
-  using namespace std;
+#include <iostream>
+using namespace std;
 
-int main(void){
-    int x;
-    cout<<"enter a value:";
-    cin >> x;
-
-    if (x > 0)
-        cout << "positive!";
-    else
-        cout << "negative!";
-
+int main (void){
+    Cryptlib();
     return 0;
 }
