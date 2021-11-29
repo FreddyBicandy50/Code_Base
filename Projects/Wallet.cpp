@@ -5,16 +5,23 @@
 #define CallFunction 1
 #define Void_NULL 0
 using namespace std; 
-typedef struct pointer{
+typedef struct chain{
     int data;
-    struct pointer *next;
-    struct pointer *prev;
+    struct chain *next;
+    struct chain *prev;
 }blockchain;
 blockchain *MetaData = NULL;
 static int func=Void_NULL;
 int login(string username,string password){ 
     func=CallFunction;
-    Cryptlib(func,username,password);
+    if(Cryptlib(func,username,password)==0){
+        cout<<"found"<<endl;
+    }
+    else if (Cryptlib(func, username, password) == 1){
+        cout<<"wrong password"<<endl;
+    }else{
+        cout<<"NOT Match!"<<endl;
+    }
     return 0;
 }
 int main(int argc,char *argv[]){
