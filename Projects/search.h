@@ -7,17 +7,7 @@
 #include <cstring>
 #include <cctype>
 #include <cstdio>
-#define INDEXED_Position 0
-#define RUNTIME_FAILURE false
-#define BUFFER_Position_Size 1
-#define Position_VALUE 2
-#define sizeofstrlen 9
-#define Access_Granted 3390
-#define UNLOCK_user 10
-#define Void0 0 
-#define NOT_Match -1
-#define Not_Found 1
-
+#include "Define.h" 
 char FILENAME[sizeofstrlen] = "list.txt";
 FILE *File_Var = fopen(FILENAME, "r");
 using namespace std;
@@ -63,7 +53,7 @@ bool init_list(string VAr_HOLDER, int keylogger){
 }
 
 //main function
-int init_SearchChain(void){
+int fsearch_call(string username,string password){
     //extracting list from database
     if (File_Var == NULL){
         cout << "FATAL:Error Search Stream!/>>IOFile Not Found!>>" << endl;
@@ -87,28 +77,8 @@ int init_SearchChain(void){
         }
         PlaceHOLDER += BUFFER_Position_Size;
     }
-
-    return Void0;
-}
-int Cryptlib(int CallFunction, string username, string password){
-    if (CallFunction == 1){
-        init_SearchChain(); 
-        if (search_unit(username, password) == Access_Granted){
-          return 0;
-        }
-        else if (search_unit(username, password) == NOT_Match){
-           return 1;
-        }
-        else{
-            return -1;
-        }
-    } 
-    //1.search
-    //2.Main Activity
-    //3.register
-    
-    return Void0;
-}
+    return search_unit(username,password);
+} 
 
 int search_unit(string username, string password){
     while (list_usernames != NULL){

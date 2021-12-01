@@ -2,8 +2,9 @@
 #include <cstring>
 #include <cstdlib>
 #include "search.h"
-#define CallFunction 1
-#define Void_NULL 0
+#include "register.h" 
+#include "Define.h" 
+
 using namespace std; 
 typedef struct chain{
     int data;
@@ -11,31 +12,48 @@ typedef struct chain{
     struct chain *prev;
 }blockchain;
 blockchain *MetaData = NULL;
-static int func=Void_NULL;
-int login(string username,string password){ 
-    func=CallFunction;
-    if(Cryptlib(func,username,password)==0){
+int login(string username,string password){
+    if (fsearch_call(username, password) == Access_Granted){
+        //main menu
         cout<<"found"<<endl;
     }
-    else if (Cryptlib(func, username, password) == 1){
-        cout<<"wrong password"<<endl;
-    }else{
-        cout<<"NOT Match!"<<endl;
+    else if (fsearch_call(username, password) == NOT_Match) {
+        cout<<"Wallet Credential not Match!"<<endl;
     }
-    return 0;
+    else{
+        cout<<"Credentials are not registered in chain!\n please run ./Wallet --register"<<endl;
+    }
+    return Void0;
 }
 int main(int argc,char *argv[]){
-    if(argc<2 || argc>3){
-        cout<<"Wallet Has no arguments!\n\t\t~run Wallet --help"<<endl;
-        return 0;
-    }else {
-        if(strcmp(argv[1],"--help")==0){
-            cout << "./Wallet username/password";
-            return 0;
-        }else{ 
-           string username=argv[1],password=argv[2];
-           login(username,password); 
-        }
+    switch (argc){
+        case 1:
+            cout << "Wallet missing argument: <$username$><$password$>"<<endl;
+            return Void0; 
+        case 2:
+            if (strcmp(argv[1],"--register")==0){
+                cout << "register missing argument: <$username$><$password$>"<<endl;
+            }else{
+                cout << "wallet missing argument: <username><$password$>"<<endl; 
+            }
+            return Void0; 
+        case 3:
+            if (strcmp(argv[1], "--register") == 0){
+                cout << "register missing argument: <username><$password$>" << endl;
+                return Void0; 
+            }else{
+                login(argv[1], argv[2]);
+                return Void0; 
+            }
+        case 4:
+            if (strcmp(argv[1], "--register") == 0){ 
+                if(fregister(argv[2],argv[3])==Void1){
+                    printf("\n<$username$:%s> aleardy Available",argv[2]);
+                }else{
+                    printf("\ncompleted please save your wallet credentials:\n\t<usermame:%s> <password:%s>",argv[2],argv[3]);
+                }
+                return Void0; 
+            }
     }
-    return 0;
+   
 }
