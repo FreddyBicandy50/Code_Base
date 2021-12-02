@@ -9,6 +9,8 @@
 #define UNLOCK_user 10
 #define Void0 0
 #define Void1 1
+#define FILENAME "list.txt"
 #define NOT_Match -1
 #define Not_Found 1 
+#define Infinite 32
 #endif // !Define_H

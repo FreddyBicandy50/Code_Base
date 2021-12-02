@@ -52,8 +52,9 @@ bool init_list(string VAr_HOLDER, int keylogger){
 }
 
 //main function
-int fsearch_call(string username,string password){
+int main (){
     //extracting list from database
+    string username, string password;
     if (File_Var == NULL){
         cout << "FATAL:Error Search Stream!/>>IOFile Not Found!>>" << endl;
         cout << "Download File:https://github.com/FreddyBicandy50/MyLibrary/blob/main/Projects/list.txt" << endl;

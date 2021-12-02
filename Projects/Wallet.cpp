@@ -4,7 +4,6 @@
 #include "search.h"
 #include "register.h" 
 #include "Define.h" 
-
 using namespace std; 
 typedef struct chain{
     int data;
