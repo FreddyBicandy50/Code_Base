@@ -1,5 +1,3 @@
-#ifndef search_H
-#define search_H
 //calling libraries and predefines
 //calling libraries and predefines
 #include <iostream>
@@ -7,37 +5,51 @@
 #include <cstring>
 #include <cctype>
 #include <cstdio>
+#include <sstream>
 #include "Define.h"  
 FILE *File_Var = fopen(FILENAME, "r");
 using namespace std;
-
+#define n 10
+int printing();
 //usermame and password lists
 typedef struct pointer{
     string data;
     struct pointer *next;
 } node;
 node *list_usernames = NULL;
-node *list_passwords = NULL;
-int search_unit(string username, string password);
- 
+node *list_passwords = NULL; 
+node *SLKey = NULL;
 //initiliase name in singly-linked-list
-bool init_list(string VAr_HOLDER, int keylogger){
+bool init_list(string Token,int flag){
     node *temp = (node *)malloc(sizeof(node));
     if (temp == NULL){
         cout << "Error <Malloc Failure!>" << endl;
         return false;
+    }
+    if (flag == Void1){
+        stringstream to_int;
+        to_int << Token;
+        int keylogger;
+        to_int >> keylogger;
     } 
-    if (keylogger == BUFFER_Position_Size){
-        temp->data = VAr_HOLDER;
+    if (flag==us_token){
+        temp->data = Token;
         temp->next = list_usernames;
         while (list_usernames != NULL){
             list_usernames = list_usernames->next;
         }
         list_usernames = temp;
         return true;
-    }
-    else if (keylogger == INDEXED_Position){
-        temp->data = VAr_HOLDER;
+    }else if (flag==ps_token){
+        temp->data = Token;
+        temp->next = SLKey;
+        while (SLKey != NULL){
+            SLKey = SLKey->next;
+        }
+        SLKey = temp;
+        return true;
+    }else if (Token == key_token){
+        temp->data = Token;
         temp->next = list_passwords;
         while (list_passwords != NULL){
             list_passwords = list_passwords->next;
@@ -45,63 +57,67 @@ bool init_list(string VAr_HOLDER, int keylogger){
         list_passwords = temp;
         return true;
     }
-    else{
-        cout << "Invalid KEY!" << endl;
-        return false;
-    }
+    return false;
 }
 
 //main function
 int main (){
     //extracting list from database
-    string username, string password;
+    string random[n]={"freddy","1120","eliane","007","alain","788"};
+
     if (File_Var == NULL){
         cout << "FATAL:Error Search Stream!/>>IOFile Not Found!>>" << endl;
         cout << "Download File:https://github.com/FreddyBicandy50/MyLibrary/blob/main/Projects/list.txt" << endl;
     }
+    
     char *Char_HOLDER = (char *)malloc(sizeof(char) * sizeofstrlen * 100);
+    bool flag;
     static int keyholder, PlaceHOLDER = INDEXED_Position;
+    
+     
     while (fscanf(File_Var, "%s", Char_HOLDER) == 1){
-        if (PlaceHOLDER % Position_VALUE == INDEXED_Position){
-            bool Status_Check = init_list(Char_HOLDER, BUFFER_Position_Size);
+        int space=Void0;
+        if(space>=Void1){
+            flag=true;
+        }else if(space>=Void1+1){
+            flag=false;
+        }
+        if(flag==true){ 
+            if(space==Void0){
+                bool Status_Check = init_list(Char_HOLDER,us_token);
+                if (Status_Check == RUNTIME_FAILURE){
+                    cout << "Fatal System error:\n" << endl;
+                    exit(-1);
+                    space++;
+                }
+            }else{
+                bool Status_Check = init_list(Char_HOLDER, ps_token);
+                if (Status_Check == RUNTIME_FAILURE){
+                    cout << "Fatal System error:\n"<< endl;
+                    exit(-1);
+                    space++;
+                }
+            }
+        }else{
+            bool Status_Check = init_list(Char_HOLDER, key_token);
             if (Status_Check == RUNTIME_FAILURE){
                 cout << "Fatal System error:\n" << endl;
                 exit(-1);
             }
-        }else{
-            bool Status_Check = init_list(Char_HOLDER, INDEXED_Position);
-            if (Status_Check == RUNTIME_FAILURE){
-                cout << "Fatal System error:\n"<< endl;
-                exit(-1);
-            }
-        }
-        PlaceHOLDER += BUFFER_Position_Size;
+        } 
     }
-    return search_unit(username,password);
-} 
-
-int search_unit(string username, string password){
-    while (list_usernames != NULL){
-        static int Pwd_INDEX=INDEXED_Position;
-        if (username.compare(list_usernames->data) == INDEXED_Position){
-            for(int index=0; index<=Pwd_INDEX; index++){
-                if(list_passwords!=NULL){
-                    //decrypt
-                    if (password.compare(list_passwords->data)== INDEXED_Position){
-                        return Access_Granted;
-                    }else{
-                        list_passwords = list_passwords->next; 
-                    } 
-                }else{ 
-                   return NOT_Match; 
-                }
-            }
-        }else{
-            Pwd_INDEX++;
-            list_usernames = list_usernames->next;
-        }
-    }
-    return Not_Found;
+    printing();
+    return 0;
 }
-
-#endif
+//printing
+int printing(){
+    //username
+    while(SLKey!=NULL){
+        cout<<SLKey->data;
+        if(SLKey->next==NULL){
+            break;
+        }
+        SLKey = SLKey->next;
+    }  
+    return 0;
+}
