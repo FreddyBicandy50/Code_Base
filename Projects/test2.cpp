@@ -26,12 +26,6 @@ bool init_list(string Token,int flag){
         cout << "Error <Malloc Failure!>" << endl;
         return false;
     }
-    if (flag == Void1){
-        stringstream to_int;
-        to_int << Token;
-        int keylogger;
-        to_int >> keylogger;
-    } 
     if (flag==us_token){
         temp->data = Token;
         temp->next = list_usernames;
@@ -40,22 +34,6 @@ bool init_list(string Token,int flag){
         }
         list_usernames = temp;
         return true;
-    }else if (flag==ps_token){
-        temp->data = Token;
-        temp->next = SLKey;
-        while (SLKey != NULL){
-            SLKey = SLKey->next;
-        }
-        SLKey = temp;
-        return true;
-    }else if (Token == key_token){
-        temp->data = Token;
-        temp->next = list_passwords;
-        while (list_passwords != NULL){
-            list_passwords = list_passwords->next;
-        }
-        list_passwords = temp;
-        return true;
     }
     return false;
 }
@@ -63,8 +41,7 @@ bool init_list(string Token,int flag){
 //main function
 int main (){
     //extracting list from database
-    string random[n]={"freddy","1120","eliane","007","alain","788"};
-
+    
     if (File_Var == NULL){
         cout << "FATAL:Error Search Stream!/>>IOFile Not Found!>>" << endl;
         cout << "Download File:https://github.com/FreddyBicandy50/MyLibrary/blob/main/Projects/list.txt" << endl;
@@ -73,38 +50,43 @@ int main (){
     char *Char_HOLDER = (char *)malloc(sizeof(char) * sizeofstrlen * 100);
     bool flag;
     static int keyholder, PlaceHOLDER = INDEXED_Position;
-    
-     
-    while (fscanf(File_Var, "%s", Char_HOLDER) == 1){
-        int space=Void0;
-        if(space>=Void1){
-            flag=true;
-        }else if(space>=Void1+1){
-            flag=false;
+    bool flag;
+    int spaces = Void0; 
+    while (fscanf(File_Var, "%s", Char_HOLDER) == Void1){ 
+        if(flag==true){
+            stringstream to_int;
+            int Token;
+            to_int << Token;
+            to_int >> Token;
+            if(Token==0){
+                spaces==0;
+            }
         }
-        if(flag==true){ 
-            if(space==Void0){
-                bool Status_Check = init_list(Char_HOLDER,us_token);
-                if (Status_Check == RUNTIME_FAILURE){
-                    cout << "Fatal System error:\n" << endl;
+        if (spaces == Void0 || spaces == Void1 ){
+            flag=false;
+        }if(spaces>1){
+            flag=true; 
+        }
+        if(flag==false){
+            if(spaces==Void0){
+                if (init_list(Char_HOLDER,us_token) == false){
+                    cout<<"fatal system error\n";
                     exit(-1);
-                    space++;
+                    spaces++;
                 }
             }else{
-                bool Status_Check = init_list(Char_HOLDER, ps_token);
-                if (Status_Check == RUNTIME_FAILURE){
-                    cout << "Fatal System error:\n"<< endl;
+                if (init_list(Char_HOLDER, ps_token) == false){
+                    cout << "fatal system error\n";
                     exit(-1);
-                    space++;
+                    spaces++;
                 }
             }
         }else{
-            bool Status_Check = init_list(Char_HOLDER, key_token);
-            if (Status_Check == RUNTIME_FAILURE){
-                cout << "Fatal System error:\n" << endl;
+            if (init_list(Char_HOLDER,key_token) == false){
+                cout << "fatal system error\n";
                 exit(-1);
             }
-        } 
+        }
     }
     printing();
     return 0;
