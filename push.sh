@@ -3,7 +3,7 @@
 git status
 git add push.sh
 git add ./Projects
-git add ./Compputer_profficency
+git add ./Computer_profficency
 git commit -m "Directory"
 git branch -M main 
 git push -f origin main
