@@ -6,7 +6,6 @@
 #include "ecrypt.h" 
 using namespace std;
 ofstream outputFile(FILENAME, ios_base::app);
-
 int fregister(string user_regist, string password_regist){
     cout << "registering/ " ;
     for (int i = Void0; i <= sizeofstrlen; i++){
