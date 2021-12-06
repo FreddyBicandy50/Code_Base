@@ -12,7 +12,9 @@
 #define FILENAME "list.txt"
 #define us_token 232
 #define ps_token 884
-#define key_token 1546
-#define Not_Found 1 
-#define Infinite 32
+#define key_token 1546 
+#define Max_password_length 1000
+#define Not_Found 1
+#define NOT_Match -1
+#define Infinite 32 
 #endif // !Define_H

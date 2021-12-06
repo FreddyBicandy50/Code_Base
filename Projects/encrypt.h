@@ -13,8 +13,6 @@ int encrypt(string password){
     for (int Vector_key_Pointer = Void0; Vector_key_Pointer <= password.length(); Vector_key_Pointer++){
         SLKey[Vector_key_Pointer] = distributionInteger(generator);
     }
-
-    
     return Void0;
 }
 
