@@ -33,7 +33,6 @@ bool init_list(string Token,int flag){
         to_int << Token;
         to_int >> key_to_int;
     }
-   
     if (flag==us_token){
         node *temp = (node *)malloc(sizeof(node));
             if (temp == NULL){

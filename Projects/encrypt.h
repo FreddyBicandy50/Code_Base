@@ -4,7 +4,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <string>
-#include <fstream>
+#include <fstream>  
 #include <chrono> //For system_clock
 #include <random>
 #include "Define.h"
@@ -21,6 +21,7 @@ int encrypt(string password){
     for (int Vector_key_Pointer = 0; Vector_key_Pointer < password.length(); Vector_key_Pointer++){
         outputFile << " " << SLKey[Vector_key_Pointer];
     } 
+    fencrpt(password,SLKey);
     return Void0;
 } 
 #endif // !ecrypt_H

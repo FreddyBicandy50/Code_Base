@@ -25,6 +25,7 @@ int login(string username,string password){
     return Void0;
 }
 int main(int argc,char *argv[]){
+
     switch (argc){
         case 1:
             cout << "Wallet missing argument: <$username$><$password$>"<<endl;
