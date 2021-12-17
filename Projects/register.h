@@ -15,8 +15,10 @@ int fregister(string user_regist, string password_regist){
     if(check_available(user_regist, password_regist)==Void1){
        return Void1;
     }else{
-        encrypt(password_regist);
-        putfile <<"\n" << user_regist << " " << password_regist; 
+        int *enc=(int *) malloc(sizeof(int)*pass.lenght());
+        enc=encrypt(password_regist);
+        cout<<enc<<endl;
+        putfile <<"\n" << user_regist << " " << enc; 
         return Void0;
     }
  

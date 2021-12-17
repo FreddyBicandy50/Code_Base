@@ -8,20 +8,17 @@
 #include <chrono> //For system_clock
 #include <random>
 #include "Define.h"
+using namespace std::chrono;
 using namespace std;
-ofstream outputFile("list.txt", ios_base::app);
+ofstream outputFile(FILENAME, ios_base::app);
 int encrypt(string password){
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    default_random_engine generator(seed);
-    uniform_int_distribution<int> distributionInteger(1, 100); // Set the numbers for int.
     int *SLKey = (int *)malloc(sizeof(int) * password.length());
-    for (int Vector_key_Pointer = 0; Vector_key_Pointer < password.length(); Vector_key_Pointer++) {
-        SLKey[Vector_key_Pointer] = distributionInteger(generator);
-    } 
     for (int Vector_key_Pointer = 0; Vector_key_Pointer < password.length(); Vector_key_Pointer++){
-        outputFile << " " << SLKey[Vector_key_Pointer];
+        u_int16_t seed = system_clock::now().time_since_epoch().count();
+        srand(seed); // Set the numbers for int. 
+        SLKey[Vector_key_Pointer] = rand() %255;
     } 
-    fencrpt(password,SLKey);
-    return Void0;
+    int *encrypted_pass=fencrypt(password,SLKey);
+    cout<<"test" ;
 } 
 #endif // !ecrypt_H
