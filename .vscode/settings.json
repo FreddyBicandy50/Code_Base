@@ -46,7 +46,13 @@
         "random": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp",
+        "chrono": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "cmake.sourceDirectory": "${workspaceFolder}/Projects"
 }

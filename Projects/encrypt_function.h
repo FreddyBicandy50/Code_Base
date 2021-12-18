@@ -1,6 +1,5 @@
 #ifndef encrypt_function_H
 #define encrypt_function_H
-
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -16,34 +15,26 @@ using namespace std::chrono;
 using namespace std;
 
 int calc(int token, int position, int *key){
+    int *cipher = (int *)malloc(sizeof(int) * password.length());
     if (key[position] % 2 == 0){
-        int encrypted = (token * key[position]) / 2;
-        return encrypted;
+        cipher[position] = (token * key[position]) / 2;
+        return 0;
     }
     else{
-        int encrypted = (token + key[position]) - pow(token, 2);
-        cout << encrypted << endl;
-        return encrypted;
+        cipher[position] = (token + key[position]) - pow(token, 2);
+        return 0;
     }
     return 1;
 }
  
 
-int fencrpt(string pass,int KeyLogger[Max_password_length]){
-int *cipher = (int *)malloc(sizeof(int) * pass.length());
-    for (int position = 0; position < pass.length(); position++){
-        int int_Ascci = (int)password[position];
-        int upload = calc(int_Ascci, position, KeyLogger);
-        if (upload != 1){
-            upload = cipher[position];
-        }
-        else{
-            cout << "Fatal system error\nexiting..." << endl;
-            exit(-1);
-        }
-    } 
+int fencrpt(string password,int KeyLogger[Max_password_length]){ 
+    int *cipher = (int *)malloc(sizeof(int) * password.length());
+    for (int position = 0; position < password.length(); position++) {
+        int Ascci = (int)password[position];
+        cipher[position] = calc(Ascci, position, SLKey);
+    }
     return &cipher;
-   
-     
 }
+
 #endif

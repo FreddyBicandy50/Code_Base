@@ -11,45 +11,32 @@
 #include "Define.h"
 using namespace std::chrono;
 using namespace std;
-string password = "freddy@aul";
-int *cipher = (int *)malloc(sizeof(int) * password.length());
-int calc(int token,int position,int *key){ 
-    if(key[position]%2==0){
-        int encrypted=(token*key[position])/2; 
-        return encrypted;
-    }else {
-        int encrypted=(token+key[position])-pow(token,2);
-        cout<<encrypted<<endl;
-        return encrypted;
+
+int reverse(int *dec,int *keylogger, int pLen);
+
+int calc(int token,int position,int *key){
+    if(token%2==0){
+        return ((token * key[position]) / 2);
+    }else{
+        return ((token + pow(token,2) - key[position]);
     }
-    return 1;
 }
 
 int main(void){
     //gen key log 
+    string password="freddy@123";
     int *SLKey = (int *)malloc(sizeof(int) * password.length());
     for (int Vector_key_Pointer = 0; Vector_key_Pointer < password.length(); Vector_key_Pointer++){
         u_int16_t seed = system_clock::now().time_since_epoch().count();
-        srand(seed); // Set the numbers for int.
+        srand(seed);
         SLKey[Vector_key_Pointer] = rand() % 122;
        
     } 
-    
-    
 
-   
+    int *cipher=(int *)malloc(sizeof(int)*password.length());
     for (int position=0; position<password.length(); position++){
-        int int_Ascci=(int)password[position];
-        int upload = calc(int_Ascci, position, SLKey);
-        if(upload!=1){
-            upload=cipher[position];
-        }
-        else{
-            cout<<"Fatal system error\nexiting..."<<endl;
-            exit(-1);
-        }
-    }
-    return *cipher;
-    
-
+        int Ascci=(int)password[position];
+        cipher[position] = calc(Ascci, position, SLKey);
+    } 
+    return 0;
 } 
