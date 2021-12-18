@@ -48,7 +48,7 @@ int main(int argc,char *argv[]){
         case 4:
             if (strcmp(argv[1], "--register") == 0){ 
                 if(fregister(argv[2],argv[3])==Void1){
-                    printf("\n<$username$:%s> aleardy Available",argv[2]);
+                    printf("\n<$username$:%s> aleardy Available !",argv[2]);
                 }else{
                     printf("\ncompleted please save your wallet credentials:\n\t<usermame:%s> <password:%s>",argv[2],argv[3]);
                 }

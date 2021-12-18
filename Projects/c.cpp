@@ -1,19 +1,12 @@
 #include <iostream>
-using namespace std;
-
-
-
-
-int main()
-{
+using namespace std; 
+int main(){ 
     int number, choice = 0;
-    while (choice != -1)
-    {
+    while (choice != -1){
         cout << "\nchoose one of the following options:\n";
         cout << "1.check if perfect number\n2.find and display factorial number\n";
         cin >> choice;
-        if (choice != -1)
-        {
+        if (choice != -1){
             cin >> number;
             switch (choice)
             {
@@ -28,7 +21,6 @@ int main()
                 break;
             }
         }
-    }
-
+    } 
     return 0;
 }
