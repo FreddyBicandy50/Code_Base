@@ -10,6 +10,7 @@
 #define Void0 0
 #define Void1 1
 #define FILENAME "list.txt"
+#define keylist "key.txt"
 #define us_token 232
 #define ps_token 884
 #define key_token 1546 

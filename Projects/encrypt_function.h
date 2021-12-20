@@ -31,7 +31,6 @@ int *fenc(string password,int KeyLogger[Max_password_length]){
     for (int position = 0; position < password.length(); position++) {
         int Ascci = (int)password[position];
         cipher[position] = calc(Ascci, position, KeyLogger);
-        cout<<cipher[position]<<" "<<endl;
     }
     return cipher;
 }

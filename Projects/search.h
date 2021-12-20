@@ -9,55 +9,44 @@
 #include <cstdio>
 #include <sstream>
 #include "Define.h"  
+#include "reverse.h"  
 FILE *File_Var = fopen(FILENAME, "r");
+FILE *File_key = fopen(keylist, "r");
 using namespace std;
-const int R=Max_password_length; 
-int IndexLoop_counter=Void0;
-int printing();
-//usermame and password lists
 typedef struct pointer{
     string username;
-    string password;
-    int key[R];
+    int password[Max_password_length];
     struct pointer *next;
+    struct pointer *prev;
 } node; 
 node *list = NULL;
 int search_unit(string username,string password);
+ 
 
 //initiliase name in singly-linked-list
-//initiliase name in singly-linked-list
-bool init_list(string Token,int flag){
-    int key_to_int;
-    if(flag==key_token){
-        stringstream to_int;
-        to_int << Token;
-        to_int >> key_to_int;
-    }
+bool init_list(string Token,int flag,int index){ 
     if (flag==us_token){
         node *temp = (node *)malloc(sizeof(node));
-            if (temp == NULL){
-            cout << "Error <Malloc Failure!>" << endl;
+        if(temp==NULL){
+            cout<<"Malloc Failure!"<<endl;
             return false;
         }
-        temp->username = Token;
-        temp->next = list;
-        while (list != NULL){
-            list = list->next;
+        while(list!=NULL){
+            list=list->next;
         }
-        list = temp; 
-        IndexLoop_counter=Void0;
+        temp=list;
+        list->username=Token; 
         return true;
-    }else if(flag==ps_token){
-        list->password = Token;
+    }else {
+        int key_to_int;
+        stringstream to_int;
+        to_int << Token;
+        to_int >> key_to_int; 
+        list->password[index]=key_to_int;
         return true;
-    }else{
-        if(IndexLoop_counter!=list->password.length()){
-            list->key[IndexLoop_counter]=key_to_int;
-            IndexLoop_counter++;
-        }
-        return true; 
     }
-    return false;
+
+    return false;   
 }
 
  
@@ -68,46 +57,23 @@ int fsearch_call (string username,string password){
         cout << "FATAL:Error Search Stream!/>>IOFile Not Found!>>" << endl;
         cout << "Download File:https://github.com/FreddyBicandy50/MyLibrary/blob/main/Projects/list.txt" << endl;
     }
-    char *Char_HOLDER = (char *)malloc(sizeof(char) * sizeofstrlen * 100);
-    bool flag;
-    static int keyholder, PlaceHOLDER = INDEXED_Position; 
-    int spaces = Void0; 
+    char *Char_HOLDER = (char *)malloc(sizeof(char) * sizeofstrlen * Max_password_length);
+    int flag=Void0;
     while (fscanf(File_Var, "%s", Char_HOLDER) == Void1){ 
-        if(flag==true){
-            stringstream to_int;
-            int Token;
-            to_int << Char_HOLDER;
-            to_int >> Token;
-            if(Token==0){
-                spaces=0;
-            }
-        }
-        if(spaces == Void0 || spaces == Void1 ){ 
-            flag=false;
-        }if(spaces>1){
-            flag=true; 
-        }
-       if(flag==false){
-            if(spaces==Void0){
-                if (init_list(Char_HOLDER,us_token) == false){
-                    cout<<"fatal system error\n";
-                    exit(-1);
-                }
-                spaces++;
-            }else{ 
-                if (init_list(Char_HOLDER, ps_token) == false){
-                    cout << "fatal system error\n";
-                    exit(-1);
-                }
-                spaces++;
-            }
-        }else{   
-            if (init_list(Char_HOLDER,key_token) == false){
-                cout << "fatal system error\n";
+         if(flag!=1){
+            init_list(Char_HOLDER,us_token,flag);
+            flag++;
+        }else{ 
+            if(init_list(Char_HOLDER,ps_token,flag-1)==false){
+                cout<<"exiting..."<<endl;
                 exit(-1);
-            }
-        } 
+            }   
+        }
+        if(flag==password.length()){
+            flag=Void0;
+        }
     } 
+
     return search_unit(username, password); 
 } 
 
@@ -116,7 +82,7 @@ int fsearch_call (string username,string password){
 int search_unit(string username, string password){
     while(list!=NULL){
         if(username.compare(list->username)==Void0){
-            if(password.compare(list->password)==Void0){
+            if(freverse(password,list->password)==Void0){
                 return Access_Granted;
             }else{
                 return NOT_Match;}
