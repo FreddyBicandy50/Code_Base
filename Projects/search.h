@@ -58,32 +58,30 @@ int fsearch_call (string username,string password){
             }
             flag++;
         }
-    }  
-    reverse_list();
+    }
+    while(list!=NULL){
+        cout<<list->username<<endl;
+        list=list->next;
+    }
+   // reverse_list();
     return search_unit(username, password); 
 }
-void reverse_list(){
-      node *current = list;
-      node *next = NULL;
-      node *prev = NULL; 
-      while (current != NULL) {
-            next= current->next;
-            current->next=prev;
-            prev=current;
-            current = next;
-      }
+/*void reverse_list(){
+    node *current = list;
+    node *next = NULL;
+    node *prev = NULL; 
+    while (current != NULL) {
+        next= current->next;
+        current->next=prev;
+        prev=current;
+        current = next;
+    }
     list = prev; 
-}
+}*/
 //searching unit
 int search_unit(string username, string password){
-    int position=Void1;
-    while(list!=NULL){
-        if(username.compare(list->username)==Void0){
-            if(checkpassword(password,position)==true) return Access_Granted;
-            else return NOT_Match;
-        }else list=list->next;  
-        position++;
-    }
+    
+  
     return Not_Found;
 } 
 #endif

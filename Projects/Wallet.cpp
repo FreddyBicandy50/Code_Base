@@ -6,18 +6,12 @@
 #include "Define.h" 
 using namespace std; 
 
-int login(string username,string password){
-    if (fsearch_call(username, password) == Access_Granted){
-        //main menu
-        cout<<"found   "<<endl;
-    }
-    else if (fsearch_call(username, password) == NOT_Match) {
-        cout<<"Wallet Credential not  Match!"<<endl;
-    }
-    else{
-        cout<<"Credentials are not registered in chain!\n please run ./Wallet --register"<<endl;
-    }
-    return Void0;
+void login(string username,string password){
+    if (fsearch_call(username, password) == Access_Granted) cout<<"found"<<endl; 
+    else if (fsearch_call(username, password) == NOT_Match) cout<<"Wallet Credential not  Match!"<<endl;
+    else cout<<"Credentials are not registered in chain!\nplease register"<<endl;
+    
+    cout<<"      ";
 }
 int main(int argc,char *argv[]){
 
@@ -26,29 +20,22 @@ int main(int argc,char *argv[]){
             cout << "Wallet missing argument: <$username$><$password$>"<<endl;
             return Void0; 
         case 2:
-            if (strcmp(argv[1],"--register")==0){
-                cout << "register missing argument: <$username$><$password$>"<<endl;
-            }else{
-                cout << "wallet missing argument: <username><$password$>"<<endl; 
-            }
-            return Void0; 
+            if (strcmp(argv[1],"--register")==Void0) cout << "register missing argument: <$username$><$password$>"<<endl;
+            else cout << "wallet missing argument: <username><$password$>"<<endl; 
+            return Void1; 
         case 3:
-            if (strcmp(argv[1], "--register") == 0){
+            if (strcmp(argv[1], "--register") == Void0){
                 cout << "register missing argument: <username><$password$>" << endl;
-                return Void0; 
-            }else{
-                login(argv[1], argv[2]);
-                return Void0; 
-            }
+                return Void1; 
+            }else login(argv[1], argv[2]); 
         case 4:
             if (strcmp(argv[1], "--register") == 0){ 
-                if(fregister(argv[2],argv[3])==Void1){
-                    printf("\n<$username$:%s> aleardy Available!",argv[2]);
-                }else{
-                    printf("\ncompleted please save your wallet credentials:\n\t<usermame:%s> <password:%s>",argv[2],argv[3]);
-                }
-                return Void0; 
+
+                if(fregister(argv[2],argv[3])==Void1) printf("\n<$username$:%s> aleardy Available!",argv[2]);
+                
+                else printf("\ncompleted please save your wallet credentials:\n\t<usermame:%s> <password:%s>",argv[2],argv[3]);
             }
     }
+    return Void0;
    
 }

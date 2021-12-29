@@ -1,36 +1,63 @@
-#include <iostream>
+#include <iostream> 
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
+#include <cstdio>
+#include <sstream>
+#include "Define.h"
+#include "reverse.h"
 using namespace std;
+typedef struct pointer{
+    string username;
+    struct pointer *next;
+} node;
+
+node *list = NULL;
+void reverse_list();
+
+// initiliase name in singly-linked-list
+bool init_list(string Token){
+    node *temp = (node *)malloc(sizeof(node));
+    if (temp == NULL){
+        cout << "Malloc Failure!" << endl;
+        return false;
+    }
+    temp->username = Token;
+    temp->next = list;
+    while (list != NULL) {
+        list = list->next;
+    }
+
+    list = temp;
+    return true;
+}
+
 int main(void){
-    int r,counter=0;
-    cout<<"enter number of rows:";
-    cin>>r;
-    for (int i = 1; i <= (r-1)/2; i++){
-        for (int j = 1; j <= r - i; j++)
-            cout<<" ";
-       for (int j = 1; j <= i+counter; j++)
-            cout<<"*"; 
-        counter++;
-        cout<<endl;
-    } 
-    
-    for (int i = 1; i <= r; i++){
-        if(i==1){
-            for (int j = 1; j <=r/2; j++)
-                cout << " ";
+
+    FILE *listfile = fopen(list_data, "r");
+    if (listfile == NULL){
+        cout << "FATAL:Error Search Stream!/>>IOFile Not Found!>>" << endl;
+        cout << "Download File:https://github.com/FreddyBicandy50/MyLibrary/blob/main/Projects/list.txt" << endl;
+    }
+    char *Char_HOLDER = (char *)malloc(sizeof(char) * sizeofstrlen * Max_password_length);
+    int flag = Void0;
+    while (fscanf(listfile, "%s", Char_HOLDER) == Void1){
+        if (isalpha(Char_HOLDER[0])){
+            flag = Void0;
         }
-        cout << "*";
-    } 
-    cout<<endl;
+        if (flag == 0){
+            if (init_list(Char_HOLDER) == false){
+                cout << "exiting...";
+                exit(-1);
+            }
+            flag++;
+        }
+    }
 
-  
-    for (int i =  (r-1)/2; i>=1 ; i--){
-        for (int j = 1; j <= r - i; j++)
-            cout<<" ";
-
-       for (int j = i+counter-1; j>= 1; j--)
-            cout<<"*"; 
-        cout<<endl;
-        counter--;
-    } 
+    while (list != NULL)
+    {
+        cout << list->username << endl;
+        list = list->next;
+    }
     return 0;
 }

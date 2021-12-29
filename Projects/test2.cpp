@@ -3,13 +3,19 @@
 #define reverse_H
 #include <iostream>
 #include <fstream>
-#include <sstream>
+#include <sstream> 
+#include <vector>
 #include "Define.h"
 #include "encrypt_function.h"
 using namespace std;
 int *key = (int *)malloc(sizeof(int) * Max_password_length);
-int *passwordkey = (int *)malloc(sizeof(int) * Max_password_length);
+typedef struct ptr{
+    int data;
+    struct ptr *next;
+}linked_list;
+linked_list *password_key=NULL;
 bool fcheck(int *address, string password);
+void reverse_password_list();
 
 //initialise essatials key Logger/ encrypted password
 void init_1(int position, string password){
@@ -32,16 +38,15 @@ void init_1(int position, string password){
     FILE *tempfile = fopen(keytemp, read_only);
     char *Char_HOLDER = (char *)malloc(sizeof(char) * Max_password_length);
     index = 0;
-    while (index != password.length())
-        if (fscanf(tempfile, "%s", Char_HOLDER) == Void1){
-            int to_int;
-            stringstream character(Char_HOLDER);
-            character >> to_int;
-            key[index] = to_int;
-            index++;
-        }
+    while (fscanf(tempfile, "%s", Char_HOLDER) == Void1){
+        int to_int;
+        stringstream character(Char_HOLDER);
+        character >> to_int;
+        key[index] = to_int;  
+        index++;
+    }
     
-
+    cout<<endl;
 
     //encrypted password from user position
     ifstream pwdline(list_data);
@@ -61,13 +66,23 @@ void init_1(int position, string password){
     FILE *pkey = fopen(pwdtemp, read_only);
     int flag;
     index = -1;
-    while (index != password.length()){
-        if (fscanf(pkey, "%s", Char_HOLDER) == Void1)
-            if (Char_HOLDER != " " && !isalpha(Char_HOLDER[0])){
+    while (fscanf(pkey, "%s", Char_HOLDER) == Void1){
+            if (!isalpha(Char_HOLDER[0])){
                 int to_int;
                 stringstream character(Char_HOLDER);
                 character >> to_int;
-                passwordkey[index] = to_int;
+
+                linked_list *temp = (linked_list *)malloc(sizeof(linked_list));
+                if (temp == NULL) {
+                    cout << "Malloc Failure!" << endl;
+                    exit(-1);
+                }
+
+                temp->data = to_int;
+                temp->next = password_key;
+                while (password_key != NULL) password_key = password_key->next;
+
+                password_key = temp;
             }
         index++;
     }
@@ -76,25 +91,48 @@ void init_1(int position, string password){
 }
 
 int main (){
-      string password="123@aul";
-      int position=1;
+    string password="rn";
+    int position=4;
     init_1(position, password);
-    int *address = fenc(password, key);
-
-    if (fcheck(address, password) == true)cout<<"true";
-    else cout<<"false"; 
-
-    return false;
+    reverse_password_list();
+    
+    int *enc_address = fenc(password, key);
+    int index=0;
+   
+    if(fcheck(enc_address, password)==true)cout<<"correct";
+    else cout<<"incorrect password";
+    return 0;     
+}
+void reverse_password_list (){
+    linked_list *current = password_key;
+    linked_list *next = NULL;
+    linked_list *prev = NULL;
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    password_key = prev;
 }
 
 bool fcheck(int *address, string password){
-    int counter, index = 0;
-    while (index != password.length()){
-        if (passwordkey[index] == address[index]) counter++;
+    linked_list *temp=(linked_list *) malloc(sizeof(linked_list));
+    int index = 0;
+    while(password_key!=NULL){
+        password_key=password_key->next;
         index++;
-    }
+    }  
 
-    if (counter == password.length()) return true; 
-    else return false; 
-}
+    if(index!=password.length()) return false;
+    
+    while(password_key!=NULL){
+        if (address[index] != password_key->data) {
+            return false;
+        }
+        password_key=password_key->next;
+        index++;
+    }    
+    return true;
+}  
 #endif // DEBUG
