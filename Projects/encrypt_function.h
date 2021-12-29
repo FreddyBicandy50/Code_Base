@@ -15,22 +15,19 @@ using namespace std::chrono;
 using namespace std;
 
 int calc(int token, int position, int *key){
-    if (key[position] % 2 == 0){
-        return (token * key[position]) / 2;
-        
-    }
-    else{
-        return (token + key[position]) - pow(token, 2);
-    }
+    if (key[position] % 2 == 0) return (token * key[position]) / 2;
+    
+    else return (token + key[position]) - pow(token, 2);
+    
     return 1;
 }
  
 
 int *fenc(string password,int KeyLogger[Max_password_length]){ 
     int *cipher = (int *)malloc(sizeof(int) * password.length());
-    for (int position = 0; position < password.length(); position++) {
+    for (int position = 0; position < password.length(); position++) { 
         int Ascci = (int)password[position];
-        cipher[position] = calc(Ascci, position, KeyLogger);
+        cipher[position] = calc(Ascci, position, KeyLogger); 
     }
     return cipher;
 }

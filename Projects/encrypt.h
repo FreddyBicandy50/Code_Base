@@ -13,6 +13,7 @@ using namespace std::chrono;
 using namespace std;
 ofstream outputFile(keylist, ios_base::app);
 int *encrypt(string password){
+    outputFile<<"\n";
     int *SLKey = (int *)malloc(sizeof(int) * password.length());
     for (int Vector_key_Pointer = 0; Vector_key_Pointer < password.length(); Vector_key_Pointer++){
         u_int16_t seed = system_clock::now().time_since_epoch().count();

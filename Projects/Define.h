@@ -9,8 +9,12 @@
 #define UNLOCK_user 10
 #define Void0 0
 #define Void1 1
-#define FILENAME "list.txt"
+#define list_data "list.txt"
 #define keylist "key.txt"
+#define keytemp "keytemp.txt"
+#define pwdtemp "pwdtemp.txt"
+#define read_only "r"
+#define read_write "w"
 #define us_token 232
 #define ps_token 884
 #define key_token 1546 

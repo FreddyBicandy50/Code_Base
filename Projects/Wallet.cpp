@@ -5,19 +5,14 @@
 #include "register.h" 
 #include "Define.h" 
 using namespace std; 
-typedef struct chain{
-    int data;
-    struct chain *next;
-    struct chain *prev;
-}blockchain;
-blockchain *MetaData = NULL;
+
 int login(string username,string password){
     if (fsearch_call(username, password) == Access_Granted){
         //main menu
-        cout<<"found"<<endl;
+        cout<<"found   "<<endl;
     }
     else if (fsearch_call(username, password) == NOT_Match) {
-        cout<<"Wallet Credential not Match!"<<endl;
+        cout<<"Wallet Credential not  Match!"<<endl;
     }
     else{
         cout<<"Credentials are not registered in chain!\n please run ./Wallet --register"<<endl;
