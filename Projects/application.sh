@@ -1,19 +1,17 @@
 #!/bin/bash
 cat start.txt
-rm pwdtemp.txt && rm keytemp.txt; 
-make Wallet
+rm -f pwdtemp.txt && rm -f keytemp.txt; 
+make -s Wallet
 declare -i choice=1;
-#read choice
+read -p ">" choice
 
 while [ true ]
 do
 	if [ $choice -eq "1" ]; then
  		touch pwdtemp.txt;
  		touch keytemp.txt;
-		#read -p "username:" username;
-		#read -p "password:" password;
-		username="tommy"
-		password="deta"
+		read -p "username:" username;
+		read -p "password:" password; 
 		./Wallet $username $password; 
 		break;
 	elif [ $choice -eq "2" ]; then
