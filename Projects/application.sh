@@ -13,6 +13,7 @@ do
 		read -p "username:" username;
 		read -p "password:" password; 
 		./Wallet $username $password; 
+
 		break;
 	elif [ $choice -eq "2" ]; then
  		read -p "username:" username;
@@ -27,3 +28,4 @@ do
 		break;
 	fi 
 done
+rm -f pwdtemp.txt && rm -f keytemp.txt;

@@ -3,11 +3,7 @@
 //calling libraries and predefines
 //calling libraries and predefines
 #include <iostream>
-#include <cstdlib>
-#include <cstring>
-#include <cctype>
-#include <cstdio>
-#include <sstream>
+#include <cstdlib>  
 #include "Define.h"      
 #include "reverse.h"      
 using namespace std;
@@ -16,6 +12,7 @@ typedef struct pointer{
     struct pointer *next;
 } node; 
 node *list = NULL;
+
 int search_unit(string username,string password);
 void reverse_list();
 
@@ -31,14 +28,13 @@ bool init_list(string Token){
     while(list!=NULL){
         list=list->next;
     }
-    
     list=temp;
     return true;   
 }
 
  
 //main function
-int fsearch_call (string username,string password){
+int database (string username,string password,bool Search){
     //extracting list from database
     FILE *listfile=fopen(list_data,"r");
     if (listfile == NULL){
@@ -80,13 +76,15 @@ void reverse_list(){
 int search_unit(string username, string password){
     int position=Void1;
     while(list!=NULL){
-        if(username.compare(list->username)==Void0){
+        if(username.compare(list->username)==Void0)
             if(checkpassword(password,position)==true) return Access_Granted;
             else  return NOT_Match;
           
-        }else list=list->next;  
+        else list=list->next;  
         position++;
     }
     return NOT_Found;
 } 
+
+
 #endif

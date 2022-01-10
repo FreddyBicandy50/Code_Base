@@ -1,6 +1,7 @@
 #!/bin/bash
 #git config --global credential.helper.cache
 git status
+git add *.*
 git add push.sh
 git add ./Projects
 git add ./Computer_profficency
