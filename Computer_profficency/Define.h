@@ -1,7 +1,7 @@
 // defining File.H
 #ifndef Define_H
 #define Define_H
-#include <iostream>
+#define Boardsize 3 
 #define no_error 0                // no error indicator
 #define error 1                   // error indicator
 #define error_exit -1             // force exit program indactes and error
@@ -23,11 +23,12 @@ void reset(){
     printf("\033[0m");
 } 
 #define RESET "\033[0m"   // Original color
-#define RED "\033[31m"    // Red
-#define GREEN "\033[32m"  // Green
-#define YELLOW "\033[33m" // Yellow
-#define BLUE "\033[34m"   // Blue
-#define WHITE "\033[37m"  // White
-#define CYAN "\033[36m"   // Cyan
+#define RED "\033[1;31m"    // Red
+#define Purple "\033[0;35m"
+#define GREEN "\033[1;32m"  // Green
+#define YELLOW "\033[1;33m" // Yellow
+#define BLUE "\033[1;34m"   // Blue
+#define WHITE "\033[1;37m"  // White
+#define CYAN "\033[1;36m"   // Cyan
 
 #endif //! Define_H

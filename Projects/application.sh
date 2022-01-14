@@ -1,7 +1,6 @@
 #!/bin/bash
 cat start.txt
 rm -f pwdtemp.txt && rm -f keytemp.txt; 
-make -s Wallet
 declare -i choice=1;
 read -p ">" choice
 
