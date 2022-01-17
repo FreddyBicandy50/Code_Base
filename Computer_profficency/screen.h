@@ -1,25 +1,18 @@
 #ifndef screen_H 
 #define screen_H
 #include <iostream>
-#include <cstdlib>
-
-#include <string>
-#include <cstring>
-#include <string.h>
+#include <cstdlib>   
+#include <cstring> 
 #include <sstream>
 #include "Define.h"
 using namespace std;
-typedef struct
-{
-    char Moves[3];
-    bool isoccupied[3];
+typedef struct{
+    char Moves[Boardsize];
+    bool isoccupied[Boardsize];
 } Table;
-/*char red[10] = "\033[1;31m" ;
-char green[10]= "\033[1;32m"; 
-char white[10]= "\033[1;37m";  */
-const char *color ;
-void logo()
-{
+string color[Boardsize][Boardsize];
+
+void logo(){
     printf("%s████████╗██╗ ██████╗ %s ████████╗ █████╗  ██████╗%s ████████╗ ██████╗ ███████╗ \n", RED,YELLOW,GREEN);
     printf("%s╚══██╔══╝██║██╔════╝ %s ╚══██╔══╝██╔══██╗██╔════╝%s ╚══██╔══╝██╔═══██╗██╔════╝\n", RED, YELLOW, GREEN);
     printf("%s   ██║   ██║██║      %s    ██║   ███████║██║     %s    ██║   ██║   ██║█████╗  \n", RED, YELLOW, GREEN);
@@ -33,11 +26,16 @@ void cls(){
     
 } 
  
+void print_result(bool winner,string winnername){
+    if(winner==true) printf("\n\t\t\t\t      %s%s Win       \n",WHITE,winnername.c_str());
+    else printf("\n\t\t\t\t       %sTIE!        \n",WHITE);
+}
 
-Table *board_update(bool start,Table *Board){
-
+Table *board_update(bool start,Table *Board,int player1_score,int player2_score){
     system("clear");
-    printf("\n\n");
+    printf("\t\t\t\t      Score");
+    printf("\n\t\t\t\t%s      %d | %d     \n", WHITE, player1_score, player2_score);
+    printf("\n");
     if (start==true){
         int counter=1;
         for (int row=0; row<Boardsize ; row++)
@@ -46,36 +44,31 @@ Table *board_update(bool start,Table *Board){
                 tostring <<counter ;
                 tostring >> Board[row].Moves[column]; 
                 Board[row].isoccupied[column] = false;
+                color[row][column]=WHITE;
                 counter++;
             } 
-    }else{
-      
+    }else {
         for (int row = 0; row < Boardsize; row++)
-            for (int column = 0; column < Boardsize; column++)
-            {
+            for (int column = 0; column < Boardsize; column++) {
                 string getboard_values;
-                getboard_values.push_back(Board[row].isoccupied[column]);
+                getboard_values.push_back(Board[row].Moves[column]);
 
-                if (getboard_values.compare("X") == 0)
-                    color= RED.c_str();
-                else if (getboard_values.compare("O") == 0)
-                    color = GREEN.c_str();
-                else
-                    color = WHITE.c_str();
+                if(getboard_values.compare("X")==0) color[row][column] = RED;
+                else if(getboard_values.compare("O")==0) color[row][column] = GREEN;
             }
+       
     }
-   
 
     printf("\t\t\t\t%s     |     |     \n", YELLOW);
-    printf("\t\t\t\t%s  %c %s |  %s%c %s |  %s%c\n", color, Board[0].Moves[0], YELLOW, color, Board[0].Moves[1], YELLOW, color, Board[0].Moves[2]);
+    printf("\t\t\t\t%s  %c %s |  %s%c %s |  %s%c\n", color[0][0].c_str(), Board[0].Moves[0], YELLOW, color[0][1].c_str(), Board[0].Moves[1], YELLOW, color[0][2].c_str(), Board[0].Moves[2]);
     printf("\t\t\t\t%s_____|_____|_____\n", YELLOW);
     printf("\t\t\t\t     |     |     \n", YELLOW);
-    printf("\t\t\t\t%s  %c%s  |  %s%c%s  |  %s%c\n", color, Board[1].Moves[0], YELLOW, color, Board[1].Moves[1], YELLOW, color, Board[1].Moves[2]);
+    printf("\t\t\t\t%s  %c%s  |  %s%c%s  |  %s%c\n", color[1][0].c_str(), Board[1].Moves[0], YELLOW, color[1][1].c_str(), Board[1].Moves[1], YELLOW, color[1][2].c_str(), Board[1].Moves[2]);
     printf("\t\t\t\t%s_____|_____|_____\n", YELLOW);
     printf("\t\t\t\t%s     |     |     \n", YELLOW);
-    printf("\t\t\t\t%s  %c %s |  %s%c  %s|  %s%c  \n", color, Board[2].Moves[0], YELLOW, color, Board[2].Moves[1], YELLOW, color, Board[2].Moves[2]);
+    printf("\t\t\t\t%s  %c %s |  %s%c  %s|  %s%c  \n", color[2][0].c_str(), Board[2].Moves[0], YELLOW, color[2][1].c_str(), Board[2].Moves[1], YELLOW, color[2][2].c_str(), Board[2].Moves[2]);
     printf("\t\t\t\t%s     |     |     \n", YELLOW);
-
-    return Board;
+    reset();
+    return 0;
 }
 #endif
