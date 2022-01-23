@@ -4,21 +4,29 @@
 #include <iostream>     //basic functions 
 #include <chrono>       //for system colock function
 #include <random>       //to random numbers
-#include <sstream>       //to random numbers
+#include <sstream>      //to stringstream func 
 #include "Define.h"     //for predefined const Variables
-#include "AI.h"     //for predefined const Variables
 #include "screen.h"     //for init/update board,print winner... 
-using namespace std;
+#include "AI.h"         //for Minimax function
+using namespace std;    
 using namespace std::chrono;
-Table *Board=(Table *) malloc(sizeof(Table)*Boardsize);//array of Board size of 3 
+
+//Initializing these variables publicly will save me some memory and parameters. 
+//game Components
+Table *Board = (Table *)malloc(sizeof(Table) * Boardsize); // array of Board size of 3
+bool playerturn;
 char Winner_Announcement,p1,p2;   //to hold winner X/O, player Move=[X/O]/Computer_Move=[X/O]
-int player1_score=0,player2_score=0;
-void restart_game(string , bool ,bool,string);
-//initialise the board with number form 1 till 9 and printing it 
+int Game_runing,player1_score = 0, player2_score = 0;  //counters the 1st to count how many spot left the others for players score
+void restart_game(string , bool ,bool,string); //function to prompt a restart when the game just end
+
+
+//initialise the board with numbers form 1 till 9 and printing it 
 void setup_game(){
 
-    board_update(true, Board, player1_score, player2_score,false); // parsing the Board as a pointer so we can remodify It later on, the true parameter indicates  the game just started (function from:screen.h)
-
+    /*parsing the Board as a pointer so we can remodify It later on, 
+    the true parameter indicates  the game just started (function from:screen.h)*/
+    board_update(true, Board, player1_score, player2_score,false); 
+    
     //get a forced random number via colock value to acheive balance in game
     u_int16_t seed = system_clock::now().time_since_epoch().count();
     srand(seed); // Set the numbers for int.
@@ -87,37 +95,63 @@ bool check_winner(){
     return false;
 }
 
+//to set players moves on the Board
+void set_move(bool isp1,string spot){
+
+   for (int row=0; row<Boardsize; row++) for (int column=0; column<Boardsize; column++)
+        if (Board[row].Moves[column]==spot[0]  ){ 
+            if(isp1==true){ 
+                Board[row].Moves[column]=p1; 
+                playerturn=false;
+            }else{
+                Board[row].Moves[column]=p2; 
+                playerturn=true;
+            }
+            board_update(false,Board,player1_score,player2_score,false); 
+            Game_runing++;
+        }  
+            
+
+}
 //this function will activate if the user choose to play with boot 
 void singleplayer(string playername,bool AI){
 
-    //initialise the board
-    setup_game(); 
-
-    //init a flag (playerturn) to check who's turn tor play
-    bool playerturn;
-    int Game_runing=0;
+    // initialise the board and decide who will play with X or O
+    setup_game();   
+    Game_runing=0;
     if(p1=='X') playerturn=true;
     else playerturn=false; 
+
     while(true){
+        /*if the game spot counter is at 9 no spots left 
+          we will check if we have a winner or NOT*/
         if (Game_runing == 9 && check_winner() == false) {
-            print_result(false," ");
+            print_result(false," ",Winner_Announcement);
             restart_game(playername,true,AI," ");
         }
-            if (Game_runing >= 5)
-                if (check_winner() == true){
-                    if (Winner_Announcement == p1) {
-                        player1_score++;
-                        board_update(false,Board,player1_score,player2_score,true);
-                        print_result(true, playername);
-                    }else {
-                        board_update(false,Board,player1_score,player2_score,true);
-                        print_result(true, "computer");
-                        player2_score++;
-                    }
-                    restart_game(playername,true,AI," "); 
-                }
 
+        /*the minimum wage to win a tic tac toe game is by
+            5 moves so we tested if we filled 5 spots yet
+            the checking for a winner will take its process
+            after each start of the loop*/
+        if (Game_runing >= 5 && check_winner()==true){
+            //if we do have a winner we need to know who it is and announce it out
+            if (Winner_Announcement == p1) {
+                player1_score++;
+                board_update(false,Board,player1_score,player2_score,true);
+                print_result(true, playername, Winner_Announcement);
+            }else {
+                player2_score++;
+                board_update(false,Board,player1_score,player2_score,true);
+                print_result(true, "computer", Winner_Announcement);
+            }
+            restart_game(playername,true,AI," "); 
+        }
+        
+        /*in tic tac toe game X is always the first  as Maximiser
+        and O is the minimiser*/ 
         if(playerturn==true){
+            //asking the user constantly for a spot in the rage
             string spot;
             do{ 
                 cout << playername << " Turn" << YELLOW << ">" << WHITE;
@@ -126,42 +160,26 @@ void singleplayer(string playername,bool AI){
                     cout << RED << "invaild Spot!" << WHITE << endl;
                     spot = ' ';
                 } 
-            }while (spot[0] < '1' || spot[0] > '9'); 
-             
-            for (int row=0; row<Boardsize; row++) for (int column=0; column<Boardsize; column++){
-                    if (Board[row].Moves[column]==spot[0]  ){ 
-                        Board[row].Moves[column]=p1; 
-                        board_update(false,Board,player1_score,player2_score,false);
-                        playerturn=false;
-                        Game_runing++;
-                    }  
-            } 
-            if(playerturn!=false) cout<<RED<<"Aleardy Occupied"<<WHITE<<endl; 
-
+            }while (spot[0] < '1' || spot[0] > '9');
+            // setting the player spot decision
+            set_move(true,spot);
+            if(playerturn!=false ) cout<<RED<<"Aleardy Occupied"<<WHITE<<endl; 
+         
         }else{
+            //is player choose easy option the bot wil play randomly
             if(AI!=true){
                 do{
+                    //generating random numbers form 1/9
                     u_int16_t seed = system_clock::now().time_since_epoch().count();
                     srand(seed); // Set the numbers for int.
                     stringstream tochar;
                     tochar << rand() % 9 + 1;
-                    char spot;
-                    tochar >> spot; 
-                    
-                    for (int row=0; row<Boardsize; row++)
-                        for (int column=0; column<Boardsize; column++)
-                            if (Board[row].Moves[column]==spot ){ 
-                                Board[row].Moves[column]=p2; 
-
-                                board_update(false, Board, player1_score, player2_score,false);
-                                playerturn=true;
-                                Game_runing++;
-                            }
+                    char spot[3];
+                    tochar >> spot[0]; 
+                    set_move(false,spot);
                } while (playerturn!=true);
-            } 
-            
-        } 
-        
+            }  
+        }  
     } 
 
 }
@@ -169,29 +187,31 @@ void singleplayer(string playername,bool AI){
 void multiplayer(string player1name, string player2name){
     // initialise the board
     setup_game();
-    bool playerturn;
-    int Game_runing = 0;
     if (p1 == 'X') playerturn = true;
-    else playerturn = false;
+    else playerturn = false; 
+    Game_runing=0;
 
+    /*the same mechanism of the game for single player
+    is used by the multiplayer just for know the p2 is a human
+    and rather than generating a number we will take a value from him*/
+     
     while (true){
         if (Game_runing == 9 && check_winner() == false){
-            print_result(false, " ");
+            print_result(false, " ", Winner_Announcement);
             restart_game(player1name, false, false, player2name);
         }
-        if (Game_runing >= 5)
-            if (check_winner() == true){
-                if (Winner_Announcement == p1){
-                    player1_score++;
-                    board_update(false, Board, player1_score, player2_score, true);
-                    print_result(true, player1name);
-                }else{
-                    player2_score++;
-                    board_update(false, Board, player1_score, player2_score, true);
-                    print_result(true, player2name);
-                }
-                restart_game(player1name, false, false, player2name);
+        if (Game_runing >= 5 && check_winner() == true){
+            if (Winner_Announcement == p1){
+                player1_score++;
+                board_update(false, Board, player1_score, player2_score, true);
+                print_result(true, player1name, Winner_Announcement);
+            }else{
+                player2_score++;
+                board_update(false, Board, player1_score, player2_score, true);
+                print_result(true, player2name, Winner_Announcement);
             }
+            restart_game(player1name, false, false, player2name);
+        }
 
         if (playerturn == true){
             string spot;
@@ -208,49 +228,32 @@ void multiplayer(string player1name, string player2name){
                 }
             }while (spot[0] < '1' || spot[0] > '9');
 
-            for (int row = 0; row < Boardsize; row++)
-                for (int column = 0; column < Boardsize; column++)
-                    if (Board[row].Moves[column] == spot[0]){
-                        Board[row].Moves[column] = p1;
-                        board_update(false, Board, player1_score, player2_score, false);
-                        playerturn = false;
-                        Game_runing++;
-                    
-                    }
-
+            set_move(true,spot);
             if (playerturn != false) cout << RED << "Aleardy Occupied" << WHITE << endl;
-            
-            else {
-                string spot;
-                do {
-                    if (p2 == 'X')
-                        cout << player2name << " Turn(" << RED << p2 << WHITE << ")" << YELLOW << ">" << WHITE;
-                    else
-                        cout << player2name << " Turn(" << GREEN << p2 << WHITE << ")" << YELLOW << ">" << WHITE;
+        }else {
+            string spot;
+            do {
+                if (p2 == 'X')
+                    cout << player2name << " Turn(" << RED << p2 << WHITE << ")" << YELLOW << ">" << WHITE;
+                else
+                     cout << player2name << " Turn(" << GREEN << p2 << WHITE << ")" << YELLOW << ">" << WHITE;
 
-                    cin >> spot;
-                    if ((spot.length() > 1) || (spot[0] < '1' || spot[0] > '9')) {
-                        cout << RED << "invaild Spot!" << WHITE << endl;
-                        spot = ' ';
-                    }
-                } while (spot[0] < '1' || spot[0] > '9');
-
-                for (int row = 0; row < Boardsize; row++)
-                    for (int column = 0; column < Boardsize; column++)
-                        if (Board[row].Moves[column] == spot[0]){
-                            Board[row].Moves[column] = p2;
-                            board_update(false, Board, player1_score, player2_score, false);
-                            playerturn = true;
-                            Game_runing++;
-                        }
-                if (playerturn != true) cout << RED << "Aleardy Occupied" << WHITE << endl;
-            }
+                cin >> spot;
+                if ((spot.length() > 1) || (spot[0] < '1' || spot[0] > '9')) {
+                    cout << RED << "invaild Spot!" << WHITE << endl;
+                    spot = ' ';
+                }
+            } while (spot[0] < '1' || spot[0] > '9');
+            set_move(false,spot); 
+            if (playerturn != true) cout << RED << "Aleardy Occupied" << WHITE << endl;
         }
+         
     }
 }
 
+//it will be activated when every the game ends asking the user for antoher match or quit
 void restart_game(string player1name, bool MOD, bool AI, string player2name) {
-        cout << "restart[y/n]:";
+        cout << "again?[y/n]:";
         string restart;
         do {
             cin >> restart;

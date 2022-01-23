@@ -1,0 +1,3 @@
+make test
+clear
+./test

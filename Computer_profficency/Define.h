@@ -13,6 +13,8 @@ void reset(){
 #define Purple "\033[0;35m"
 #define GREEN "\033[1;32m"  // Green
 #define YELLOW "\033[1;33m" // Yellow
+#define GOLD "\033[3;33m" // Yellow
+#define GREY "\033[90m"   // Yellow
 #define BLUE "\033[1;34m"   // Blue
 #define WHITE "\033[1;37m"  // White
 #define CYAN "\033[1;36m"   // Cyan
