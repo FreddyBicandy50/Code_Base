@@ -13,7 +13,7 @@ int main(void)
     logo();
 
     /*asking the user constantly for a choice to play single or multiplayer
-    NOTE:ANY OTHER VALUE THE PROGRAM WON"T ACCEPT
+       NOTE:ANY OTHER VALUE THE PROGRAM WON"T ACCEPT
     entering a infinite loop to take a specified choice from user*/
 
     string choice; 
@@ -38,10 +38,9 @@ int main(void)
                         cout << RED << "invalid Option!\n"<< WHITE;
                     else 
                         if (difficulty.compare("easy") == 0 || difficulty.compare("Easy") == 0)
-
                         singleplayer(playername, false);
-                        else if (difficulty.compare("hard") == 0 || difficulty.compare("Hard") == 0)
 
+                         else if (difficulty.compare("hard") == 0 || difficulty.compare("Hard") == 0)
                         singleplayer(playername, true); 
 
                 } while (difficulty.compare("easy") != 0 && difficulty.compare("Easy") != 0 && difficulty.compare("hard") != 0 && difficulty.compare("Hard") != 0);
@@ -58,3 +57,5 @@ int main(void)
 
     return 0;
 } 
+ 
+                         //dd   

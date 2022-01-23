@@ -178,10 +178,12 @@ void singleplayer(string playername,bool AI){
                     tochar >> spot[0]; 
                     set_move(false,spot);
                } while (playerturn!=true);
+            }else{
+                string bestmove=compMove(Board,Game_runing,p1,p2);    
+                set_move(false,bestmove);
             }  
         }  
-    } 
-
+    }  
 }
 
 void multiplayer(string player1name, string player2name){
