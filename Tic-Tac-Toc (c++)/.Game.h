@@ -5,9 +5,9 @@
 #include <chrono>       //for system colock function
 #include <random>       //to random numbers
 #include <sstream>      //to stringstream func 
-#include "Define.h"     //for predefined const Variables
-#include "screen.h"     //for init/update board,print winner... 
-#include "AI.h"         //for Minimax function
+#include ".Define.h"     //for predefined const Variables
+#include ".screen.h"     //for init/update board,print winner... 
+#include ".AI.h"         //for Minimax function
 using namespace std;    
 using namespace std::chrono;
 

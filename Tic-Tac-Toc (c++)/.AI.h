@@ -1,7 +1,7 @@
 #ifndef AI_H
 #define AI_H
-#include "Game.h"
-#include "screen.h"
+#include ".Game.h"
+#include ".screen.h"
 char win;
 // function to check if we have a winner after 5 attemps
 bool check(Table Board[Boardsize]){

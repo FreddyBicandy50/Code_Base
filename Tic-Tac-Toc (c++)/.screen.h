@@ -4,7 +4,7 @@
 #include <cstdlib>  //for the struct 
 #include <cstring>  //for string functions
 #include <sstream>  //for string stream
-#include "Define.h" //for predefined vraibales/Colors
+#include ".Define.h" //for predefined vraibales/Colors
 using namespace std;
 /*this is the Board that have 2 Blocks 
 the frist is for moves and hold a char as u see 

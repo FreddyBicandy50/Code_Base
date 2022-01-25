@@ -1,19 +1,18 @@
 // calling libraries and defining fnctions
 #include <iostream>  //basic functions
-#include "Define.h"  //for predefined const Variables and colors
-#include "Game.h"    //for predefined Variables
+#include ".Define.h"  //for predefined const Variables and colors
+#include ".Game.h"    //for predefined Variables
 using namespace std; // to avoid using std with every io funciont
 
   // main function
-int main(void)
-{
+int main(void){
     /*to clear the terminal screen from any history commands (function file:screen.h)
     diplay the fancy TIK TAC TOE logo    (function file:screen.h)*/
     cls();
     logo();
 
     /*asking the user constantly for a choice to play single or multiplayer
-       NOTE:ANY OTHER VALUE THE PROGRAM WON"T ACCEPT
+    NOTE:ANY OTHER VALUE THE PROGRAM WON"T ACCEPT
     entering a infinite loop to take a specified choice from user*/
 
     string choice; 

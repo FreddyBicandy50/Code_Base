@@ -1,3 +1,0 @@
-make test
-clear
-./test
