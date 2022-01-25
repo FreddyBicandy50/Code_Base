@@ -37,57 +37,58 @@ bool check(Table Board[Boardsize]){
 }
 
 int minimax(Table Board[Boardsize], int Depth, char p1, char p2, bool isMaximising);
-string compMove(Table Board[Boardsize], int av_spot, char p1, char p2){
-    int bestScore = -10000, score = 0;
-    string temp, bestMove;
-    for (int row = 0; row < Boardsize; row++) for (int column=0; column<Boardsize; column++)
-        if (Board[row].Moves[column]!='X' && Board[row].Moves[column]!='O') {
-            temp = Board[row].Moves[column];
-            Board[row].Moves[column] = p2;
-            score = minimax(Board, av_spot-1, p1, p2, false);
-            Board[row].Moves[column] = temp[0];
-            if (score > bestScore){
-                    bestScore = score;
-                    bestMove = temp;
-                }
+
+string compMove(Table Board[Boardsize], int av_spot, char player1, char player2){
+    
+    int score,bestscore=-1000;
+    string temp,bestmove;
+
+
+    for (int row=0; row< Boardsize; row++) for (int column = 0; column<Boardsize; column++)
+        if(Board[row].Moves[column]!='X' && Board[row].Moves[column]!='O'){
+            temp=Board[row].Moves[column];
+            Board[row].Moves[column]=player2;
+            score=minimax(Board,av_spot-1,player1,player2,false);
+            Board[row].Moves[column]=temp[0];
+            if(score>bestscore){
+                bestscore=score;
+                bestmove=temp;
+            }           
         }
     
-    return bestMove;
+    
+    return bestmove;
 }
-
+ 
 int minimax(Table Board[Boardsize], int Depth, char p1, char p2, bool isMaximising){
-    if(check(Board)==true && win==p2) {
-        cout<<"awal if";
-        return 100;
-        
-    }else if(check(Board)==true && win!=p2){ 
-        cout<<"tene if";
-        return -100;
-    }else if(check(Board)==false && Depth==0){
-        cout<<"telit if";
-
-        return 0;
-    } 
-    int bestScore = -10000, score = 0;
-    string temp, bestMove;
-    if(isMaximising==true){
-        for (int row = 0; row < Boardsize; row++) for (int column = 0; column < Boardsize; column++)
-            if (Board[row].Moves[column] != 'X' && Board[row].Moves[column] != 'O'){
-                temp = Board[row].Moves[column];
-                Board[row].Moves[column] = p2;
-                score = minimax(Board, Depth-1, p1, p2, false);
-                Board[row].Moves[column] = temp[0];
-                if (score > bestScore) bestScore = score;
-                     
-            }
-    }else{
-        bestScore=800;
+    //checking if we already have a winner
+    if (check(Board) == true && win == p2)  return 100;  
+    else if (check(Board) == true && win != p2) return -100;
+    else if (check(Board) == false && Depth == 0)  return 0;
+    
+    int bestScore,score;
+    string temp;
+    //swapping turns to make the computer play against him self
+    if (isMaximising == true) {
+        bestScore=-1000;
+        for (int row = 0; row < Boardsize; row++)
+            for (int column = 0; column < Boardsize; column++)
+                if (Board[row].Moves[column] != 'X' && Board[row].Moves[column] != 'O') {
+                    temp = Board[row].Moves[column];
+                    Board[row].Moves[column] = p2;
+                    score = minimax(Board, Depth - 1, p1, p2, false);
+                    Board[row].Moves[column] = temp[0];
+                    if (score > bestScore)
+                        bestScore = score;
+                }
+    }else {
+        bestScore = 800;
         for (int row = 0; row < Boardsize; row++)
             for (int column = 0; column < Boardsize; column++)
                 if (Board[row].Moves[column] != 'X' && Board[row].Moves[column] != 'O'){
-                    temp=Board[row].Moves[column];
-                    Board[row].Moves[column]=p1;
-                    score = minimax(Board, Depth - 1, p1, p2, false);
+                    temp = Board[row].Moves[column];
+                    Board[row].Moves[column] = p1;
+                    score = minimax(Board, Depth - 1, p1, p2, true);
                     Board[row].Moves[column] = temp[0];
                     if (score < bestScore) bestScore = score;
                 }

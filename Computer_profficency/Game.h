@@ -38,7 +38,7 @@ void setup_game(){
     }else{
         p1='O';
         p2='X';
-    } 
+    }
 }
 
 //function to check if we have a winner after 5 attemps
