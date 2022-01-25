@@ -55,7 +55,7 @@ int main(void)
             }
     } while (choice.compare("S") != 0 && choice.compare("s") != 0 && choice.compare("m") != 0 && choice.compare("M") != 0);
 
-    return 0;
+    return   0;
 } 
  
-                         //dd   
+        //dd    

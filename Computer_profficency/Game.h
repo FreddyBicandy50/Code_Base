@@ -25,7 +25,7 @@ void setup_game(){
 
     /*parsing the Board as a pointer so we can remodify It later on, 
     the true parameter indicates  the game just started (function from:screen.h)*/
-    board_update(true, Board, player1_score, player2_score,false); 
+        board_update(true, Board, player1_score, player2_score,false); 
     
     //get a forced random number via colock value to acheive balance in game
     u_int16_t seed = system_clock::now().time_since_epoch().count();
@@ -96,8 +96,7 @@ bool check_winner(){
 }
 
 //to set players moves on the Board
-void set_move(bool isp1,string spot){
-
+void set_move(bool isp1,string spot){ 
    for (int row=0; row<Boardsize; row++) for (int column=0; column<Boardsize; column++)
         if (Board[row].Moves[column]==spot[0]  ){ 
             if(isp1==true){ 
@@ -179,8 +178,8 @@ void singleplayer(string playername,bool AI){
                     set_move(false,spot);
                } while (playerturn!=true);
             }else{
-                string bestmove=compMove(Board,Game_runing,p1,p2);    
-                set_move(false,bestmove);
+                string bestmove=compMove(Board,9-Game_runing,p1,p2);    
+               set_move(false,bestmove);
             }  
         }  
     }  
