@@ -1,8 +1,9 @@
-#include <stdio.h>
-#include <cs50.h>
-int main (void)
-{
-  string name=get_string("what is your name?");
-  printf("hello %s\n",name);
+#include <iostream>
+using namespace std;
+int main (void){
+  string name;
+  cout<<"what is your name?";
+  cin>>name;
+  cout<<"hello "<<name<<":)"<<endl; 
   return 0;
 }
