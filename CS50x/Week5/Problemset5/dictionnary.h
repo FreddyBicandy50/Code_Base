@@ -15,7 +15,7 @@ void store(int index1,int index2,char getword[255]){
     table[index1][index2]=temp;  
     return;
 }
-node *load(FILE *texts_file,FILE *dictionary_file){
+void load(FILE *texts_file,FILE *dictionary_file){
     
     char getwords[255];
     int hash=0;
@@ -26,12 +26,8 @@ node *load(FILE *texts_file,FILE *dictionary_file){
         if(getwords[1]-97>=0) store(hash,getwords[1]-97,getwords);
         else store(hash, 0, getwords);
     } 
-    while (table[25][25]!=NULL){
-        cout<<table[25][25]->word<<endl;
-        table[25][25]= table[25][25]->next;
-    }
-
-    return table[LEN][LEN];
+    return;
 }
+
 
 #endif // !dictionnary_H
