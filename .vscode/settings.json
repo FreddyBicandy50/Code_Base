@@ -54,5 +54,6 @@
         "ratio": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
-    "cmake.sourceDirectory": "${workspaceFolder}/Projects"
+    "cmake.sourceDirectory": "${workspaceFolder}/Projects",
+    "sqltools.connections": []
 }
