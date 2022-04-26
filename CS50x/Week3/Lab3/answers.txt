@@ -1,6 +1,0 @@
-we tested every sorting algorithms with different file 
-so we can determin wich sorting is using either:
-[Selection sort]	[Bubble sort]	[Merge sort]
-sort1 is Bubble sort with time complexity of best case O(n)11
-sort2 is Merge sort with average time complexity of O(nlog(n))133
-sort3 is Selection sort with average time complexity of O(n*2)68
