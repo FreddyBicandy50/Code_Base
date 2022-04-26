@@ -1,0 +1,2 @@
+scratch is a fun easy and a popular way to get engaged with programming and logical thinking we do even let kids play and explore within it 
+so I took my boat and tried to create an origin retro game that stems from childhood memories so I think it's worth being in here ;) 
