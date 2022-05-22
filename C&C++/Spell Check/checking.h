@@ -5,14 +5,14 @@
 using namespace std;
 
 //checking arguments for initial program
-bool argument_check(int argc){
+void argument_check(int argc){
     if(argc<2){
         cout << "Usage ~ ./Speller [foldername/filename]"<<endl;
         exit(-1);
     }else if(argc >=3){
         cout << "Too few arguments!"<<endl;
         exit(-1);
-    }else return true;
+    }else return;
 }
 
 //check and open files 
