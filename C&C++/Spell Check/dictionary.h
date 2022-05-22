@@ -60,7 +60,7 @@ void store(int index1,int index2,char getword[255]){
 }
 
 
-void load(FILE *texts_file,FILE *dictionary_file){
+void load(FILE *dictionary_file){
     char getwords[255]; 
     int counter = 0; 
     while(fscanf(dictionary_file, "%s",&getwords)!=EOF){

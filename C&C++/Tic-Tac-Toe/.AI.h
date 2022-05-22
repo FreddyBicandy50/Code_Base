@@ -10,7 +10,7 @@ bool check(Table Board[Boardsize]){
     for (int row = 0; row < Boardsize; row++)
         if (Board[row].Moves[1] == Board[row].Moves[0] && Board[row].Moves[2] == Board[row].Moves[0]) {
             win = Board[row].Moves[0]; 
-            return true;
+            return true; 
         }
 
     // columns
