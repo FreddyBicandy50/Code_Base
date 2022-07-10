@@ -1,7 +1,7 @@
 #!/bin/bash
 #git config --global credential.helper.cache
 git status
-git add *.*
+git add -r /home/null/git
 git add push.sh
 git commit -m "Directory"
 git branch -M main
