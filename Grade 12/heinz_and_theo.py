@@ -14,7 +14,7 @@ def select_category(machine):
     if(category): 
         print(machine[category])
         product=int(input("Select Product:")) 
-        print(machine[category][product])
+        print(machine[category][product-1])
         return category 
     else:
         print("INVALID") 

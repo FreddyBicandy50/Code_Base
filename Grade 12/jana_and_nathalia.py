@@ -1,15 +1,16 @@
 def payment(category):
     if category=="Chocolate":
-        calc(1)
+        return 1
     elif category=="Chips&crackers":
-        calc(2)
+        return 2
     elif category=="Wafers":
-        calc(1.5)
+        return 1.5
     else:
-        calc(2.5)
+        return 2.5
 
 def calc(price): 
-    pay=int(input("please pay price above:"))
+    print("please pay",price,"$")
+    pay=int(input("Payment:"))
 
     if pay<price:
         print("Not enough ammount of money")
