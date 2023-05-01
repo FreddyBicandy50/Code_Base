@@ -15,7 +15,7 @@ public class test{
         q.enqeue(31);  
         q.enqeue(11);  
         q.enqeue(45);  
-        q.enqeue(56);     
+        q.enqeue(56); 
         q.deqeue();
         q.deqeue();
         q.deqeue();
@@ -29,8 +29,7 @@ public class test{
         q.enqeue(1);
         q.deqeue();
         q.print_array();
-        
     }
-
+    
     
 }
