@@ -19,8 +19,7 @@ public class qeue {
         if (rear == -1) {
             array[0] = number;
             rear++;
-        }
-        
+        } 
         else {
             if (rear+1 <= array.length - 1) {
                 rear++;
@@ -32,16 +31,7 @@ public class qeue {
             }
         } 
         temprear=rear;
-    }
-    public void print_array(){
-       
-        if(rear==-1 && front==-1){
-            System.out.println("array is empty!");
-        }else{
-             System.out.println("\nfront="+"["+front+"]="+array[front]);
-                System.out.println("rear"+"["+rear+"]="+array[rear]);
-        }
-    }
+    } 
     public void deqeue(){ 
         if(front!=-1){ 
             array[front]=0;
@@ -53,6 +43,14 @@ public class qeue {
             if(front==array.length-1) front=0;
             else front++;
         }
-    }   
+    }    
 
+     public void print_array(){ 
+        if(rear==-1 && front==-1){
+            System.out.println("array is empty!");
+        }else{
+             System.out.println("\nfront="+"["+front+"]="+array[front]);
+             System.out.println("rear"+"["+rear+"]="+array[rear]);
+        }
+    } 
 }
