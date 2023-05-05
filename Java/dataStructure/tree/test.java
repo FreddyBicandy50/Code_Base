@@ -5,24 +5,9 @@ public class test {
         Tree tree=new Tree();
         tree.insert(20);
         tree.insert(10);
-<<<<<<< HEAD:test.java
         tree.print();
 }
 
-=======
-        tree.insert(5); 
-        tree.insert(30); 
-        tree.insert(25); 
-        tree.insert(60); 
-        tree.insert(30); 
-        tree.insert(90); 
-        tree.insert(11);  
-        tree.insert(3); 
-        tree.insert(1); 
-        tree.insert(2); 
-        tree.search(5);
-    }
->>>>>>> refs/remotes/origin/main:Java/dataStructure/tree/test.java
     /*public static void stack(){
         qeue q = new qeue();
         q.enqeue(12);
