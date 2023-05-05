@@ -5,7 +5,8 @@ public class test {
         tree.insert(20);
         tree.insert(10);
         tree.print();
-    }
+}
+
     /*public static void stack(){
         qeue q = new qeue();
         q.enqeue(12);
