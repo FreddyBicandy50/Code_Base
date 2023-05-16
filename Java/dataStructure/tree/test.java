@@ -6,14 +6,20 @@ public class test {
         tree.insert(5); 
         tree.insert(30); 
         tree.insert(25); 
-        tree.insert(60); 
-        tree.insert(30); 
+        tree.insert(60);  
         tree.insert(90); 
         tree.insert(11);  
         tree.insert(3); 
         tree.insert(1); 
         tree.insert(2); 
+<<<<<<< HEAD
         
         tree.search(5); 
+=======
+
+        
+       // tree.rn_preorder();
+        tree.inorderTraversal();
+>>>>>>> refs/remotes/origin/main
     }
 }

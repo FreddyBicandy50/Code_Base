@@ -5,25 +5,31 @@ public class Tree {
 public Tree(){this.root = null;}
 
 public void insert(int number) {
+    //make a temp variable and assign the number to it 
     Node temp = new Node();
     temp.data = number;
-    if (root == null) {
-        root = temp;
-    } else {
+    //check the head if empty add the new number 
+    if (root == null) root = temp;
+    else {
+        //make another pointer to the tree head
         Node current = root;
-        while (true)  
-            if (number > current.data)   
+        while (true) 
+            //check if the number greater or less than the number inside the tree 
+            if (number > current.data)  
+                //check if the right pointer null 
                 if (current.right == null) {
+                    //if yes assign the temp node to the right branch and break the loop
                     current.right = temp;
                     break;
-                } else current = current.right; 
+                }
+                //if the right node contains number go sit on it
+                else current = current.right; 
             else  
                 if (current.left == null) {
                     current.left = temp;
                     break;
                 } else current = current.left;   
-    }
-    
+    } 
 }
   public void search(int number) {
       Node temp=new Node();
@@ -46,6 +52,36 @@ public void insert(int number) {
           } 
       }
   }
+  
+ public void rn_preorder(){
+    Node temp=root;
+    preorderTraversal(temp);
+}
+
+ public void preorderTraversal(Node node) {
+        if (node == null)
+            return;
+ 
+        System.out.println(node.data);
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
+    }
+
+
+ public void inorderTraversal() {
+        Node temp=root;
+        inorderTraversal(temp);
+    }
+
+    private void inorderTraversal(Node node) {
+        if (node == null)
+            return;  
+
+        inorderTraversal(node.left);
+        System.out.println(node.data);
+        inorderTraversal(node.right);
+    }
+
     public class Node{
         int data;
         Node left;
