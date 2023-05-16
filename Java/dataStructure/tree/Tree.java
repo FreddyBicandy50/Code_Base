@@ -52,6 +52,36 @@ public void insert(int number) {
           } 
       }
   }
+  
+ public void rn_preorder(){
+    Node temp=root;
+    preorderTraversal(temp);
+}
+
+ public void preorderTraversal(Node node) {
+        if (node == null)
+            return;
+ 
+        System.out.println(node.data);
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
+    }
+
+
+ public void inorderTraversal() {
+        Node temp=root;
+        inorderTraversal(temp);
+    }
+
+    private void inorderTraversal(Node node) {
+        if (node == null)
+            return;  
+
+        inorderTraversal(node.left);
+        System.out.println(node.data);
+        inorderTraversal(node.right);
+    }
+
     public class Node{
         int data;
         Node left;
