@@ -1,7 +1,11 @@
 
-public class Tree {
+public class Tree { 
+    public class Node{
+        int data;
+        Node left;
+        Node right;
+    } 
     Node root;
-
 public Tree(){this.root = null;}
 
 public void insert(int number) {
@@ -53,39 +57,36 @@ public void insert(int number) {
       }
   }
   
- public void rn_preorder(){
+ public void Traversal(int num){
     Node temp=root;
-    preorderTraversal(temp);
+    if (num==1) PREorderTraversal(temp);
+    else if (num==2) INorderTraversal(temp);
+    else if (num==3) POSTorderTraversal(temp);
 }
 
- public void preorderTraversal(Node node) {
-        if (node == null)
-            return;
+ public void PREorderTraversal(Node node) {
+        if (node == null)return;
  
         System.out.println(node.data);
-        preorderTraversal(node.left);
-        preorderTraversal(node.right);
-    }
+        PREorderTraversal(node.left);
+        PREorderTraversal(node.right);
+    } 
 
+    private void INorderTraversal(Node node) {
+        if (node == null) return;  
 
- public void inorderTraversal() {
-        Node temp=root;
-        inorderTraversal(temp);
-    }
-
-    private void inorderTraversal(Node node) {
-        if (node == null)
-            return;  
-
-        inorderTraversal(node.left);
+        INorderTraversal(node.left);
         System.out.println(node.data);
-        inorderTraversal(node.right);
+        INorderTraversal(node.right);
+    }
+    private void POSTorderTraversal(Node node) {
+        if (node == null)return;  
+
+        POSTorderTraversal(node.left);
+        POSTorderTraversal(node.right);
+        System.out.println(node.data);
     }
 
-    public class Node{
-        int data;
-        Node left;
-        Node right;
-    }
+
   
 }
