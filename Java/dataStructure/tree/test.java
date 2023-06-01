@@ -15,6 +15,6 @@ public class test {
 
         
        // tree.rn_preorder();
-        tree.inorderTraversal();
+        tree.delete(5);
     }
 }

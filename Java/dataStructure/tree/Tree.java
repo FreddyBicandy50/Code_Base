@@ -52,7 +52,9 @@ public void insert(int number) {
           } 
       }
   }
-  
+  public void delete(int number){
+    
+  }
  public void rn_preorder(){
     Node temp=root;
     preorderTraversal(temp);
