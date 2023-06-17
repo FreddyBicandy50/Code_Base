@@ -9,19 +9,11 @@ public class test {
         tree.insert(60);  
         tree.insert(90); 
         tree.insert(11);  
-<<<<<<< HEAD
-
-        
-       // tree.rn_preorder();
-        tree.Traversal(1);
-=======
         tree.insert(3); 
         tree.insert(1); 
-        tree.insert(2); 
-
+        tree.insert(2);  
         
        // tree.rn_preorder();
         tree.delete(5);
->>>>>>> refs/remotes/origin/main
     }
 }
