@@ -5,6 +5,7 @@ public class Tree {
         Node left;
         Node right;
     } 
+    
     Node root;
 public Tree(){this.root = null;}
 
@@ -56,15 +57,8 @@ public void insert(int number) {
           } 
       }
   }
-<<<<<<< HEAD
   
  public void Traversal(int num){
-=======
-  public void delete(int number){
-    
-  }
- public void rn_preorder(){
->>>>>>> refs/remotes/origin/main
     Node temp=root;
     if (num==1) PREorderTraversal(temp);
     else if (num==2) INorderTraversal(temp);
