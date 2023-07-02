@@ -1,5 +1,4 @@
- 
-public class linkdlist{
+ public class linkdlist{
       static class Node {
         int data;
         Node prev;
