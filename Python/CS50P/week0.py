@@ -7,4 +7,8 @@ def indoorvoice():
 def playbackspeed(): 
     print(input("").replace(" ","..."))
 
-playbackspeed()
+#Making Faces
+def makingfaces():
+    message=input("")
+    message,iconemote=message.split("")
+def convert
