@@ -43,26 +43,26 @@ def FS():
 
 #Math Interpreter
 def calc(exp): 
-        if(exp.split("+")):
+        if "+"in exp :
             exp=exp.split("+")
             if exp[0].isdigit() and exp[1].isdigit(): 
                 return int(exp[0]) + int(exp[1])
             else:  
                 return "Math error"
-        if (exp.split("*")):
+        elif "*" in exp:
             exp=exp.split("*")
             if exp[0].isdigit() and exp[1].isdigit():
                 return int(exp[0]) * int(exp[1])
             else:
-                 return "Math error"
-        if (exp.split("/")):
+                return "Math error"
+        elif "/" in exp:
             exp=exp.split("/")
             print(f"{exp[0]}/{exp[1]}")
             if exp[0].isdigit() and exp[1].isdigit():
                 return int(exp[0]) / int(exp[1])
             else:
                  return "Math error"
-        if (exp.split("-")):
+        elif "-" in exp:
             exp=exp.split("-")
             if exp[0].isdigit() and exp[1].isdigit():
                 return int(exp[0]) - int(exp[1])
@@ -71,4 +71,5 @@ def calc(exp):
  
 def MathInterpreter():
     print(f"{calc(input('Expression:'))}")
+
 MathInterpreter()
