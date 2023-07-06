@@ -71,5 +71,24 @@ def calc(exp):
  
 def MathInterpreter():
     print(f"{calc(input('Expression:'))}")
+ 
 
-MathInterpreter()
+#Meal Time
+def convert(time): 
+    if time is not None and ":" in time:
+        hours,minutes= time.replace(" ","").split(":")
+        if minutes is not None:
+           minutes=float(int(minutes)/60)
+        hours=int(hours)
+        if hours>=7 and hours<=8:
+            return "breakfast time"
+        elif hours>=12 and hours<=13:
+            return "lunch time"
+        elif hours>=18 and hours<=19:
+            return "dinner time"
+        else :
+            return " "
+def MealTime():
+    print(f"{convert(input('What time is it?'))}")
+
+MealTime()
