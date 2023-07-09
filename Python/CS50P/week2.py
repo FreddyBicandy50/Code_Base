@@ -35,4 +35,4 @@ def setting(inpt):
     return temp
 def twttr():
     print(f"Output:{setting(input('Input:').lower())}")
-twttr()
+twttr() 
