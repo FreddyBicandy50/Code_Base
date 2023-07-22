@@ -1,11 +1,14 @@
-calc = "f*1"
-if(calc.split("+")):
-    operands = calc.split("+")
-if(calc.split("*")):
-    calc = calc.split("*")
-    operands="*"
+Poster =[
+        {"name":"apple",
+         "calorie":"130"},
+        {"name":"avocado",
+         "calorie":"50"},
+        {"name":"banana",
+         "calorie":"110"},
+        {"name":"kiwifruit",
+         "calorie":"90"},
+        {"name":"orange",
+         "calorie":"80"}
+    ]
 
-if(calc[0].isdigit()):
-    print(calc[0]*2)
-else:
-    print("no") 
+print(len(Poster)-1)

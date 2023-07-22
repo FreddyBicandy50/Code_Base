@@ -35,4 +35,68 @@ def setting(inpt):
     return temp
 def twttr():
     print(f"Output:{setting(input('Input:').lower())}")
-twttr() 
+ 
+#Vanity Plates
+def is_valid(s):
+    #check length if >6
+    if(len(s)>6 or len(s)<2):  
+        return False
+    else: 
+        punclist=['.','$',' ','#',',','^','%','_','-','=','+','/','*']
+        for i in s:
+            if i in punclist:
+                return False
+        start=0 
+        for j in range(2):
+            #check first 2 character if letters
+            if(s[j].isalpha()):
+                start+=1 
+                 
+        if(start<2): 
+            return False
+        else: 
+            if(len(s)==2):
+                return True
+            else:  
+                digit=False 
+                for i in range(2,len(s)):
+                    if s[i].isdigit(): 
+                            if s[i]=='0' and not digit:
+                                return False
+                            else:
+                                digit=True
+                    else:
+                        if(digit):
+                            return False
+    return True
+
+                     
+def VanityPlates(): 
+    if is_valid(input("Plate: ").upper()):
+        print("Valid")
+    else:
+        print("Invalid")
+
+
+#Nutrition Facts
+def check(item=""):
+     Poster =[
+        {"name":"apple",
+         "calorie":"130"},
+        {"name":"avocado",
+         "calorie":"50"},
+        {"name":"banana",
+         "calorie":"110"},
+        {"name":"kiwifruit",
+         "calorie":"90"},
+        {"name":"orange",
+         "calorie":"80"}
+    ]
+     for i in range(0,len(Poster)-1):
+        if Poster[i]["name"]==item:
+            print("Calories:",Poster[i]["calorie"]) 
+            return
+        
+def NutritionFacts():
+    check(input("Item:").lower())
+
