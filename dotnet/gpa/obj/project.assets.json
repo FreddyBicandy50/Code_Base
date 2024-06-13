@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fbicandy/Code_Base/dotnet/GPA/GPA.csproj",
+      "projectUniqueName": "/home/fbicandy/Code_Base/dotnet/gpa/GPA.csproj",
       "projectName": "GPA",
-      "projectPath": "/home/fbicandy/Code_Base/dotnet/GPA/GPA.csproj",
+      "projectPath": "/home/fbicandy/Code_Base/dotnet/gpa/GPA.csproj",
       "packagesPath": "/home/fbicandy/.nuget/packages/",
-      "outputPath": "/home/fbicandy/Code_Base/dotnet/GPA/obj/",
+      "outputPath": "/home/fbicandy/Code_Base/dotnet/gpa/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fbicandy/.nuget/NuGet/NuGet.Config"
